@@ -100,3 +100,6 @@ ENV/
 
 # .DS_store
 .DS_Store
+
+# .flaskenv
+.flaskenv
