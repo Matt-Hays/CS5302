@@ -1,6 +1,15 @@
-autopep8==1.6.0
-pycodestyle==2.8.0
-PyMySQL==1.0.2
-six @ file:///AppleInternal/BuildRoot/Library/Caches/com.apple.xbs/Sources/python3/python3-103/six-1.15.0-py2.py3-none-any.whl
-SQLAlchemy==1.4.31
-toml==0.10.2
+black==22.1.0
+click==8.0.4
+Flask==2.0.3
+Flask-SQLAlchemy==2.5.1
+itsdangerous==2.1.0
+Jinja2==3.0.3
+MarkupSafe==2.1.0
+mypy-extensions==0.4.3
+pathspec==0.9.0
+platformdirs==2.5.1
+python-dotenv==0.19.2
+SQLAlchemy==1.4.32
+tomli==2.0.1
+typing-extensions==4.1.1
+Werkzeug==2.0.3
