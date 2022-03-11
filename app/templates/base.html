@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baseball DB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/main.css') }}">
+    {% block title %}{% endblock %}
 </head>
 <body>
     <h1>Lahman Baseball Database</h1>
-    <p><em>*Disclaimer: The designers of this program dislike baseball. So, why did we make a baseball db website? Well, we forced to. <strong>Gimme an A!</strong></em> </p>
     {% block content %}{% endblock %}
 </body>
 </html>
