@@ -8,22 +8,34 @@ If you have any questions or trouble psuhing/pulling/forking the repo, please le
 
 ###### Please use and merge branches so that we're not overwriting each other's work - or doing the same thing twice.
 
-###### Git Commands
+###### Basic Git Usage
 
-- Install Git
-  - ("git-scm")[https://git-scm.com/book/en/v2/Getting-Started-Installing-Git]
-  
-- Check Git install
-  - git --version 
-  
-- Assign remote repository
-  - git remote add origin git@github.com:*_YOUR-USERNAME_*/CS5302.git
-  
-- Check remote repository is added
-  - git remote --v(erbose)  
+- Install Git [git-scm Install Site](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 
-- Create a working branch locally
-  - git checkout -b <branch-name> 
+- Use `$ git --version` to check install and version number.
+
+- Use `$ git init` to start a local repository.
+
+- Use `$ git remote add origin git@github.com:<YOUR-USERNAME>/CS5302.git` to add the remote repo to git.
   
-- Set set remote to the new branch
-  - forgot right now, will test and re-write
+- You can check the remotes you have saved by using `$ git remote show origin`
+
+- Use `$ git pull origin main` to make a local copy of the main repository.
+
+- Use `$ git checkout -b <branch-name>` to create a new local branch. The hightlighted one is your current working branch.
+  
+- Use `$ git branch -a` to show all branches.
+
+- Use `$ git push -u origin <YOUR-branch-name>` this will create a remote branch if none exists of the same name as your branch. We will review and merge code using the GitHub interface.
+
+- If you make an accidental commit *locally*, you can reset it by using `$ git reset HEAD`. This will reset **1** commit backwards.
+
+*Don't remove your branch until all merges on GitHub are complete*
+
+- To merge locally Use `$ git merge --no-ff <branch-name>` Make sure you're in the branch you want to merge **into**.
+
+- To remove a branch locally use `$ git branch -d <branch-name>`
+
+*You can't delete a branch that is currently in use. Use* `$ git branch checkout master` *to change to the master (or main) branch before deletion.*
+
+- You'll still have /remotes/orgin/<branch-name> Remove with `$ git push origin --delete <brach-name>` **Warning this will delete the remote branch too!**
