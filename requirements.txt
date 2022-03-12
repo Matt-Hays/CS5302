@@ -26,6 +26,8 @@ six==1.16.0
 SQLAlchemy==1.4.32
 toml==0.10.2
 tomli==2.0.1
+types-Flask-SQLAlchemy==2.5.1
+types-SQLAlchemy==1.4.19
 typing-extensions==4.1.1
 virtualenv==20.13.3
 Werkzeug==2.0.3
