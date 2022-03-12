@@ -8,8 +8,16 @@
 	/* Baseball Color Palette */
 	--bg_color: #181d1f;
 	--text_color: #d6d5da;
-	--hlt_brown: #FF5E00;
+	--hlt_brown: #ff5e00;
 	--hlt_blue: #0ff;
+}
+
+/* Global Styles */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
 }
 
 body {
@@ -17,12 +25,13 @@ body {
 	color: var(--text_color);
 }
 
-/* NAVIGATION */
+/* Navigation */
+
 #top-nav {
-	/* height: 4rem; */
+	height: 96px;
 	display: flex;
 	align-items: center;
-	box-shadow: 0 0 2px 1px #0008;
+	border-bottom: 1px solid #bbb6;
 }
 
 #nav-logo {
@@ -54,7 +63,13 @@ body {
 	text-decoration: underline;
 }
 
-/* PRIMARY SEARCH */
+/* Primary Search */
+
+.primary-search {
+	display: flex;
+	justify-content: center;
+}
+
 #search-form {
 	text-align: left;
 	margin-right: 4rem;
@@ -71,7 +86,7 @@ body {
 #main-search {
 	width: 30rem;
 	height: 2.5rem;
-	border-radius: 16px;
+	border-radius: 10px;
 	border: 3px solid var(--hlt_brown);
 	background-color: var(--bg_color);
 	padding: 5px;
@@ -86,16 +101,50 @@ body {
 }
 
 .submit_btn {
-	width: 6rem;
-	height: 2rem;
+	width: 6.5rem;
+	height: 2.3rem;
 	background-color: var(--hlt_brown);
 	border: none;
 	border-radius: 10px;
 	margin-left: 1rem;
 	color: var(--white_1);
+	font-weight: bold;
+}
+
+.submit_btn:hover {
+	cursor: pointer;
+	border: 2px solid var(--hlt_blue);
 }
 
 .submit_btn:active {
 	background-color: var(--hlt_blue);
-	color: var(--black_1);
+	color: var(--bg_color);
+	box-shadow: none;
+}
+
+/* Login Icon and Link */
+
+#login-container {
+	cursor: pointer;
+	color: inherit;
+	text-decoration: none;
+	display: flex;
+}
+
+#login-container:hover {
+	text-decoration: underline;
+}
+
+.login-icon {
+	fill: #fff;
+	height: 1.25rem;
+	margin: 0 4rem 0 0.6rem;
+}
+
+.baseball-icon {
+	fill: #fff;
+	height: 1.25rem;
+	position: relative;
+	top: 2px;
+	left: 2px;
 }
