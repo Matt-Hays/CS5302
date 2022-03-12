@@ -1,5 +1,3 @@
-{% import 'components/navigation.html' as nav %}
-
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -8,13 +6,45 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link
 			rel="stylesheet"
-			href="{{ url_for('static', filename='styles/main.css') }}"
+			href="{{ url_for('static', filename='styles/globals.css') }}"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='styles/index.css') }}"
 		/>
 		{% block title %}{% endblock %}
 	</head>
 	<body>
-		{# Navigation #} {{ nav.top_nav() }}
+		{# Navigation #}
+		<nav id="top-nav">
+			<h2 id="nav-logo">
+				<a href="/">Baseball Search</a>
+			</h2>
+
+			<ul class="nav-links">
+				<li class="nav-link">
+					<a href="/">Home</a>
+				</li>
+				<li class="nav-link">
+					<a href="/search">Search</a>
+				</li>
+				<li class="nav-link">
+					<a href="/players">Players</a>
+				</li>
+			</ul>
+			<form action="" method="POST" novalidate id="search-form">
+				{{ form.hidden_tag() }}
+				<div class='label'>
+					{{ form.user_query.label(class_='main-label') }}
+					<!---->
+					{{ form.user_query(size=48, id='main-search', placeholder='Enter a query') }}
+					<!---->
+				</div>
+			</form>
+		</nav>
+
 		<h1>Lahman Baseball Database</h1>
+
 		{% block content %}{% endblock %}
 	</body>
 </html>
