@@ -1,16 +1,20 @@
 :root {
-	/* COLOR SCHEME */
-	--highlight_2: #ffa303;
-	--highlight_1: #f82e00;
-	--primary_1: #771631;
-	--white_1: #fff;
-	--black_1: #000;
-
 	/* PRIMARY SIZES */
 	--header_1: 4rem;
 	--header_2: 3rem;
 	--subheader: 2rem;
 	--std_font: 1rem;
+
+	/* Baseball Color Palette */
+	--bg_color: #181d1f;
+	--text_color: #d6d5da;
+	--hlt_brown: #FF5E00;
+	--hlt_blue: #0ff;
+}
+
+body {
+	background-color: var(--bg_color);
+	color: var(--text_color);
 }
 
 /* NAVIGATION */
@@ -46,7 +50,7 @@
 }
 
 .nav-link > a:hover {
-	color: var(--highlight_2);
+	color: var(--hlt_brown);
 	text-decoration: underline;
 }
 
@@ -56,6 +60,8 @@
 	margin-right: 4rem;
 	margin-top: 1rem;
 	margin-bottom: 1rem;
+	display: flex;
+	align-items: center;
 }
 
 .main-label {
@@ -66,13 +72,30 @@
 	width: 30rem;
 	height: 2.5rem;
 	border-radius: 16px;
-	border: 3px solid var(--highlight_1);
+	border: 3px solid var(--hlt_brown);
+	background-color: var(--bg_color);
 	padding: 5px;
 	padding-left: 15px;
 	outline: none;
 	font-size: 1rem;
+	color: var(--text_color);
 }
 
 #main-search:focus {
-	border-color: var(--highlight_2);
+	border-color: var(--hlt_blue);
+}
+
+.submit_btn {
+	width: 6rem;
+	height: 2rem;
+	background-color: var(--hlt_brown);
+	border: none;
+	border-radius: 10px;
+	margin-left: 1rem;
+	color: var(--white_1);
+}
+
+.submit_btn:active {
+	background-color: var(--hlt_blue);
+	color: var(--black_1);
 }

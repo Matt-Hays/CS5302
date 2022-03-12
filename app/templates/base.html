@@ -32,6 +32,7 @@
 					<a href="/players">Players</a>
 				</li>
 			</ul>
+			
 			<form action="" method="POST" novalidate id="search-form">
 				{{ form.hidden_tag() }}
 				<div class='label'>
@@ -40,6 +41,7 @@
 					{{ form.user_query(size=48, id='main-search', placeholder='Enter a query') }}
 					<!---->
 				</div>
+				<div>{{ form.submit(class_='submit_btn') }}</div>
 			</form>
 		</nav>
 
