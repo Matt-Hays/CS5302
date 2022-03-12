@@ -4,7 +4,7 @@
 A virtual environment will allow for the installation of the required packaged (as specified in *requirements.txt*). There are a number of ways to do this.  One of the easiest ways is to use the [venv](https://docs.python.org/3/library/venv.html) module.  You may have to install this first (`pip install venv`). Once installed:
 1. Create a new virtual environment: `python3 -m venv venv`
 1. Activate the new virtual environment on Linux: `source venv/bin/activate`
-	* For Windows activation, run the venv/bin/Activate.ps1 powershell script.  If it won't run, you may have to adjust the Powershell Execution Policy via `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` from a Powershell prompt.
+	* For Windows activation, run the venv/bin/Activate.ps1 Powershell script.  If it won't run, you may have to adjust the Powershell Execution Policy via `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` from a Powershell prompt.
 1. Install packages: `pip install -r requirements.txt`
 
 ### Necessary Packages - See requirements.txt
@@ -30,7 +30,7 @@ If you have any questions or trouble pushing/pulling/forking the repo, please le
 
 - Use `$ git pull origin main` to make a local copy of the main repository.
 
-- Use `$ git checkout -b <branch-name>` to create a new local branch. The hightlighted one is your current working branch.
+- Use `$ git checkout -b <branch-name>` to create a new local branch. The highlighted one is your current working branch.
 
 - Use `$ git branch -a` to show all branches.
 
@@ -49,10 +49,10 @@ If you have any questions or trouble pushing/pulling/forking the repo, please le
 - You'll still have /remotes/orgin/<branch-name> Remove with `$ git push origin --delete <brach-name>` **Warning this will delete the remote branch too!**
 
 ### Pre-Commit Hooks
-A number of precommit hooks have been included to help keep our code neat and tidy. You must follow the guidance above to create a virtual environment and install the packages from *requirements.txt* to utilize pre-commit.
+A number of pre-commit hooks have been included to help keep our code neat and tidy. You must follow the guidance above to create a virtual environment and install the packages from *requirements.txt* to utilize pre-commit.
 
 1. Install pre-commit: `pre-commit install`
-1. Initially istall hooks: `pre-commit run --all-files`
+1. Initially install hooks: `pre-commit run --all-files`
 
 The hooks will run whenever you attempt to commit new files. You will not be able to commit unless you fix the errors that are indicated. You can run the individual hooks via:
 
@@ -67,4 +67,4 @@ There may be times when you don't agree with **flake8**.  In these cases, it may
 1. *Flake8* - Code Linting
 1. *Mypy* - Type Checking
 
-Additionally, there are a number of github provided hooks that ensure trailing whitespace is caught and configuration files (like *json* or *yaml*) are formatted correctly.
+Additionally, there are a number of GitHub provided hooks that ensure trailing white-space is caught and configuration files (like *json* or *yaml*) are formatted correctly.
