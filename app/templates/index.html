@@ -6,11 +6,94 @@
 <title>{{ "title" }}</title>
 {% endblock %} {% block content %}
 <section class="player">
-  <h1>Player Name</h1>
-  <ul>
-    <li>Position</li>
-    <li>Bats:</li>
-    <li>Throws:</li>
-  </ul>
+  {% if results %}
+  <h1>{{ results[0].playerid }}</h1>
+  <article class="player-table-container">
+    {% for result in results %}
+    <h2>{{ result.yearID }}</h2>
+    <table class="player-table">
+      <th>
+        <tr>
+          <td class="table-header">Year</td>
+          <td class="table-header">Games Played</td>
+          <td class="table-header">At Bats</td>
+          <td class="table-header">Runs</td>
+          <td class="table-header">Hits</td>
+        </tr>
+      </th>
+      <tr>
+        <td>{{ result.yearID }}</td>
+        <td>{{ result.G }}</td>
+        <td>{{ result.AB }}</td>
+        <td>{{ result.R }}</td>
+        <td>{{ result.H }}</td>
+      </tr>
+
+      <th>
+        <tr>
+          <td class="table-header">Doubles</td>
+          <td class="table-header">Triples</td>
+          <td class="table-header">Home Runs</td>
+          <td class="table-header">Runs Batted In</td>
+          <td class="table-header">SB?</td>
+        </tr>
+      </th>
+      <tr>
+        <td>{{ result.B2 }}</td>
+        <td>{{ result.B3 }}</td>
+        <td>{{ result.HR }}</td>
+        <td>{{ result.RBI }}</td>
+        <td>{{ result.SB }}</td>
+      </tr>
+
+      <th>
+        <tr>
+          <td class="table-header">CS?</td>
+          <td class="table-header">BB?</td>
+          <td class="table-header">SO?</td>
+          <td class="table-header">IBB?</td>
+          <td class="table-header">Hit by Pitch</td>
+        </tr>
+      </th>
+      <tr>
+        <td>{{ result.CS }}</td>
+        <td>{{ result.BB }}</td>
+        <td>{{ result.SO }}</td>
+        <td>{{ result.IBB }}</td>
+        <td>{{ result.HBP }}</td>
+      </tr>
+
+      <th>
+        <tr>
+          <td class="table-header">SH?</td>
+          <td class="table-header">SF?</td>
+          <td class="table-header">Ground in Double Play</td>
+          <td class="table-header">On Base Percentage</td>
+          <td class="table-header">TB</td>
+        </tr>
+      </th>
+      <tr>
+        <td>{{ result.SH }}</td>
+        <td>{{ result.SF }}</td>
+        <td>{{ result.GIDP }}</td>
+        <td>{{ result.OBP }}</td>
+        <td>{{ result.TB }}</td>
+      </tr>
+
+      <th>
+        <tr>
+          <td class="table-header">Runs Created</td>
+          <td class="table-header">Runs Created Park Adjusted (RC27)</td>
+        </tr>
+      </th>
+      <tr>
+        <td>{{ result.RC }}</td>
+        <td>{{ result.RC27 }}</td>
+      </tr>
+    </table>
+    {% endfor %}
+    <!---->
+    {% endif %}
+  </article>
 </section>
 {% endblock %}

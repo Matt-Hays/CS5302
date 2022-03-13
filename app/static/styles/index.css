@@ -1,4 +1,26 @@
 .player {
-	padding-top: 1rem;
-	padding-left: 2rem;
+  padding-top: 1rem;
+  padding-left: 2rem;
+}
+
+.player-table-container {
+  margin-top: 2rem;
+}
+
+.player-table-container > h2 {
+  margin-top: 4rem;
+}
+
+.player-table {
+  width: 100%;
+  /* margin: 2rem auto; */
+}
+
+.player-table th,
+.player-table td {
+  padding: 0.5rem 1rem;
+}
+
+.table-header {
+  font-weight: bold;
 }
