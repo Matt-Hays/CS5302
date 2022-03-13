@@ -1,19 +1,28 @@
 .player {
-  padding-top: 1rem;
-  padding-left: 2rem;
+  width: 90%;
+  margin: auto;
 }
 
-.player-table-container {
+.player-table-container-outer {
   margin-top: 2rem;
 }
 
-.player-table-container > h2 {
+.player-table-container-inner {
+  background-color: var(--text_color);
+  border-radius: 10px;
+  color: black;
   margin-top: 4rem;
+  padding: 1rem 2rem;
+}
+
+.player-table-container-inner > h2 {
+  text-align: center;
+  font-size: 2rem;
+  text-decoration: underline;
 }
 
 .player-table {
   width: 100%;
-  /* margin: 2rem auto; */
 }
 
 .player-table th,
