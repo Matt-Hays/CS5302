@@ -35,8 +35,8 @@ CREATE TABLE `analysis` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 INSERT INTO analysis(playerid,yearid,g,ab,r,h,2b,3b,hr,rbi,sb,
-cs,bb,so,ibb,hbp,sh,sf,gidp) 
+cs,bb,so,ibb,hbp,sh,sf,gidp)
 SELECT playerid,yearid, SUM(g),SUM(ab),SUM(r),SUM(h),SUM(2b),
 SUM(3b),SUM(hr),SUM(rbi),SUM(sb), SUM(cs),SUM( bb),SUM(so),
-SUM(ibb),SUM(hbp),SUM(sh),SUM(sf),SUM(gidp) 
+SUM(ibb),SUM(hbp),SUM(sh),SUM(sf),SUM(gidp)
 FROM batting GROUP BY playerid,yearid;

@@ -6,4 +6,3 @@
     popupParent.onmouseout = function() {
         document.getElementById('popup').style.visibility = 'hidden';
     };
-
