@@ -3,7 +3,7 @@
 ## bevent.sh
 [bevent.sh](./bevent.sh) - uses BEVENT.EXE to parse the event files looking for pitcher statistics.
 
-When run against all of the event files, this generated **396MB** worth of data.
+When run against all of the event files, this generated **432MB** worth of data.
 
 ```
 0    game id
@@ -37,12 +37,16 @@ When run against all of the event files, this generated **396MB** worth of data.
     22   Triple
     23   Home run
     24   Missing play
+
+43   RBI on play
 ```
+
+The resulting data will need to be summed to get season numbers for each pitcher.
 
 ## bgame.sh
 [bgame.sh](./bgame.sh) - uses BGAME.EXE to parse the event file for game statistics.
 
-When run against all of the eent files, this generated **MB**  worth of data.
+When run against all of the eent files, this generated **9.8MB**  worth of data.
 
 ```
 0    game id
