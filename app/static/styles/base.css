@@ -1,0 +1,46 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.top-nav {
+  display: grid;
+  grid-template-areas: "logo . links . . . . . . . . account";
+  align-items: center;
+  height: 80px;
+  box-shadow: 0 0 1px 1px #4444;
+  padding: 0 2rem;
+}
+
+.nav-logo {
+  grid-area: logo;
+  font-size: 1.2rem;
+}
+
+.nav-links {
+  grid-area: links;
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-account {
+  grid-area: account;
+  display: flex;
+  justify-content: space-between;
+}
+
+.active-nav {
+  font-weight: bold;
+}

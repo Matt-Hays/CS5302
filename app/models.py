@@ -1,4 +1,36 @@
-from app import db
+from app import db, login  # noqa
+from werkzeug.security import check_password_hash, generate_password_hash
+from flask_login import UserMixin
+
+
+@login.user_loader
+def load_user(id):
+    return User.query.get(int(id))
+
+
+class User(UserMixin, db.Model):  # type: ignore #noqa
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(255), unique=True, index=True, nullable=False)
+    password_hash = db.Column(db.String(255), nullable=False)
+    favorite_players = db.relationship("Favorite", backref="user", lazy="dynamic")
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password, "sha256", 12)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+    def __repr__(self):
+        return "<User {}>".format(self.username)
+
+
+class Favorite(db.Model):  # type: ignore #noqa
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+    # player_id = db.Column(db.Integer, db.ForeignKey('people.playerid'))
+
+    def __repr__(self):
+        return "<User {}>".format(self.username)
 
 
 # class User(db.Model):  # type: ignore # noqa

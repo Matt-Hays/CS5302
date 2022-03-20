@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+<!---->
+
+{% block styles %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/login.css') }}"
+/>
+{% endblock %}
+<!---->
+{% block content %}
+<h1>Login</h1>
+{% with messages = get_flashed_messages() %}
+<!---->
+{% if messages %}
+<!---->
+{% for message in messages %}
+<span style="color: red">{{message}}</span>
+{% endfor %}
+<!---->
+{% endif %}
+<!---->
+{% endwith %}
+
+<form action="" method="POST" novalidate class="login-form">
+  {{ form.hidden_tag() }}
+  <p class="input-container">
+    {{ form.username.label }}
+    <!---->
+    {{ form.username(size=32, class_="form-input") }}
+    <!---->
+    {% for error in form.username.errors %}
+    <span style="color: red">{{ error }}</span>
+    {% endfor %}
+  </p>
+  <p class="input-container">
+    {{ form.password.label }}
+    <!---->
+    {{ form.password(size=32, class_="form-input") }} {% for error in
+    form.password.errors %}
+    <span style="color: red">{{ error }}</span>
+    {% endfor %}
+  </p>
+  <p class="input-container">
+    {{ form.remember_me(class_="form-remember-me") }} {{ form.remember_me.label
+    }}
+  </p>
+  <p class="input-container">{{ form.submit(class_="form-submit") }}</p>
+</form>
+
+{% endblock %}

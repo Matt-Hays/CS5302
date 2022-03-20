@@ -1,7 +1,7 @@
-from dotenv import dotenv_values
+import os
 
 
 class Config(object):
-    SECRET_KEY = "myamazinglycomplexsecretkeythatnoonewilleverguess"
-    SQLALCHEMY_DATABASE_URI = dotenv_values(".env")["CONNECTION_STRING"]
+    SECRET_KEY = os.environ.get("SECRET_KEY")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URI")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
