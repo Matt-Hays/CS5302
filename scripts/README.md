@@ -3,10 +3,15 @@
 ## bevent.sh
 [bevent.sh](./bevent.sh) - uses BEVENT.EXE to parse the event files looking for pitcher statistics.
 
-When run against all of the event files, this generated **432MB** worth of data.
+When run against all of the event files, this generated **260MB** worth of data.
 
 ```
 0    game id
+3    batting team
+
+    0   visiting team
+    1   home team
+
 14   pitcher
 34   event type
 
@@ -46,11 +51,10 @@ The resulting data will need to be summed to get season numbers for each pitcher
 ## bgame.sh
 [bgame.sh](./bgame.sh) - uses BGAME.EXE to parse the event file for game statistics.
 
-When run against all of the eent files, this generated **9.8MB**  worth of data.
+When run against all of the eent files, this generated **4.6MB**  worth of data.
 
 ```
 0    game id
-1    date
 7    visiting team
 8    home team
 9    game site
@@ -60,3 +64,6 @@ When run against all of the eent files, this generated **9.8MB**  worth of data.
 36   visitor hits
 37   home hits
 ```
+
+## teams.sh
+[teams.sh](./teams.sh) - reads in the teams files (TEAMYYYY), places the year as the first entry, and writes them out to to a file. I then leverage this file to match teams to their league.

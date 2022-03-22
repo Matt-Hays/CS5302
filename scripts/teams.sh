@@ -11,5 +11,5 @@ fi
 for YEAR in `(seq 1974 1 2019)`
 do
 	echo "Processing: $YEAR"
-	wine BEVENT.EXE -y $YEAR -f 0,3,14,34,43 $YEAR* >> $OUTFILE
+	sed -e 's/^/'$YEAR',/' TEAM$YEAR >> $OUTFILE
 done
