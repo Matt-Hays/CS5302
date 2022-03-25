@@ -16,6 +16,9 @@ CREATE TABLE `PitchingAnalytics` (
   `BA` decimal(5,2) DEFAULT NULL, -- bases advanced
   `PA` smallint(6) DEFAULT NULL, -- plate appearances
   `RC` decimal(5,1) DEFAULT NULL, -- runs created
+  --`PARC` -- park-adjusted runs created = RC/((teams.BPF+100)/200)
+  --`PARC27` -- park-adjusted runs created per 27 outs = (PARC*27)/(AB+SF+SH+CS+GIDP-H)
+  --`PARCA` -- park-adjusted runs against = ???
   PRIMARY KEY (`against_ID`),
   UNIQUE KEY `against_ID` (`playerID`,`yearID`),
   CONSTRAINT `against_peoplefk` FOREIGN KEY (`playerID`) REFERENCES `people` (`playerID`)
