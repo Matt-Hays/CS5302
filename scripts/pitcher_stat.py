@@ -376,6 +376,8 @@ def load_pitching_stats(event_csv: Path) -> None:
                 pitcher_stats[pitcherID][(team, year)].D += 1
             elif event == E_Type.T.value:
                 pitcher_stats[pitcherID][(team, year)].T += 1
+            elif event == E_Type.HR.value:
+                pitcher_stats[pitcherID][(team, year)].HR += 1
 
 
 def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) -> None:
@@ -431,8 +433,8 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
                         [
                             f"('{playerID}',{year},{stint_num},'{team}','{league}',",
                             f"{stat.SO},{stat.SB},{stat.CS},{stat.PO},{stat.PB},",
-                            f"{stat.W},{stat.IW},{stat.S},{stat.D},{stat.T},{stat.HR},",
-                            f"{stat.RBI}),",
+                            f"{stat.W},{stat.IW},{stat.S + stat.D + stat.T + stat.HR},",
+                            f"{stat.D},{stat.T},{stat.HR},{stat.RBI}),",
                         ]
                     )
                 )
