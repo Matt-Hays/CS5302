@@ -2,7 +2,6 @@
 from dataclasses import dataclass
 import sys
 import csv
-import textwrap
 from pathlib import Path
 from enum import Enum
 from collections import defaultdict
@@ -100,39 +99,6 @@ pitcher_stats: DefaultDict[str, DefaultDict[Tuple[str, int], Stat]] = defaultdic
 pitcher: Dict[str, Any] = {}
 
 
-pitching_against = textwrap.dedent(
-    """\
-    CREATE TABLE `PitchingAgainst` (
-    `ID` int(11) NOT NULL AUTO_INCREMENT,
-    `playerID` varchar(9) NOT NULL,
-    `yearID` smallint(6) NOT NULL,
-    `stint` smallint(6) NOT NULL,
-    `teamID` char(3) DEFAULT NULL,
-    `lgID` char(2) DEFAULT NULL,
-    `SO` smallint(6) DEFAULT NULL,
-    `SB` smallint(6) DEFAULT NULL,
-    `CS` smallint(6) DEFAULT NULL,
-    `PO` smallint(6) DEFAULT NULL,
-    `PB` smallint(6) DEFAULT NULL,
-    `W` smallint(6) DEFAULT NULL,
-    `IW` smallint(6) DEFAULT NULL,
-    `AB` smallint(6) DEFAULT NULL,
-    `H` smallint(6) DEFAULT NULL,
-    `2B` smallint(6) DEFAULT NULL,
-    `3B` smallint(6) DEFAULT NULL,
-    `HR` smallint(6) DEFAULT NULL,
-    `RBI` smallint(6) DEFAULT NULL,
-    PRIMARY KEY (`ID`),
-    UNIQUE KEY `playerID` (`playerID`,`yearID`,`stint`),
-    KEY `lgID` (`lgID`),
-    CONSTRAINT `pa_lgfk` FOREIGN KEY (`lgID`) REFERENCES `leagues` (`lgID`),
-    CONSTRAINT `pa_playerfk` FOREIGN KEY (`playerID`) REFERENCES `people` (`playerID`)
-    )  ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-    \n\n
-    """
-)
-
-
 def load_teams(teams_csv: Path) -> None:
     with open(teams_csv, newline="") as csvfile:
         teamreader = csv.reader(csvfile, delimiter=",", quotechar='"')
@@ -219,9 +185,6 @@ def pitcherID_to_playerID(player_csv: Path) -> None:
             for playerID, innerdict in pitcher.items():
                 # default to None
                 pitcher[playerID]["playerID"] = None
-
-                # if playerID == 'carmf001' or playerID == 'castf002':
-                #     pdb.set_trace()
 
                 if innerdict["debut"] is None and innerdict["first"] is None:
                     sql = no_debut
@@ -400,27 +363,15 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
     pitcherID_to_playerID(players_csv)
     print("[+] PlayerIDs loaded")
 
-    # TODO: need to add team_ID and FK, looking up ahead of time?
     with open("PitchingAgainst.sql", "w") as f:
-        f.write("DROP TABLE IF EXISTS `PitchingAgainst`;\n\n")
-        f.write(pitching_against)
 
-        heading = "".join(
-            (
-                "INSERT INTO `PitchingAgainst` (",
-                "`playerID`,`yearID`,`stint`,`teamID`,`lgID`,`SO`,`SB`,`CS`,`PO`,",
-                "`PB`,`W`,`IW`,`AB`,`H`,`2B`,`3B`,`HR`,`RBI`) VALUES ",
-            )
-        )
-
-        insert = [heading]
         for pitcherID, outerdict in pitcher_stats.items():
             stints: List[int] = []
 
             for stint, stat in outerdict.items():
-                team: str = stint[Stint.TEAMID.value]  # type: ignore
+                # team: str = stint[Stint.TEAMID.value]  # type: ignore
                 year: int = stint[Stint.YEAR.value]  # type: ignore
-                league = teams[stint]
+                # league = teams[stint]
 
                 stint_num: int = stints.count(year)
                 stints.append(year)
@@ -434,20 +385,21 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
                 if playerID is None:
                     continue
 
-                insert.append(
-                    "".join(
-                        [
-                            f"('{playerID}',{year},{stint_num},'{team}','{league}',",
-                            f"{stat.SO},{stat.SB},{stat.CS},{stat.PO},{stat.PB},",
-                            f"{stat.W},{stat.IW},{stat.AB},",
-                            f"{stat.S + stat.D + stat.T + stat.HR},",
-                            f"{stat.D},{stat.T},{stat.HR},{stat.RBI}),",
-                        ]
-                    )
-                )
+                statement = [
+                    "UPDATE PitchingAgainst SET ",
+                    f"`H` = {stat.S + stat.D + stat.T + stat.HR}, ",
+                    f"`2B` = {stat.D}, ",
+                    f"`3B` = {stat.T}, ",
+                    f"`SB` = {stat.SB}, ",
+                    f"`CS` = {stat.CS}, ",
+                    f"`AB` = {stat.AB}, ",
+                    f"`RBI` = {stat.RBI} ",
+                    f"WHERE `playerID` LIKE '{playerID}' ",
+                    f"AND yearID = {year} ",
+                    f"AND stint = {stint_num};\n",
+                ]
 
-        records = "".join(insert)[:-1] + ";\n"
-        f.write(records)
+                f.write("".join(statement))
 
 
 if __name__ == "__main__":
