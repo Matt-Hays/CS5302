@@ -1,11 +1,8 @@
 from flask import redirect, render_template, url_for, flash, request
 from app import app, db
 from werkzeug.urls import url_parse
-
-# from wtforms.validators import DataRequired
 from flask_login import current_user, login_required, login_user, logout_user
 from app.models import User
-
 from app.forms import LoginForm, RegistrationForm
 
 
@@ -45,7 +42,7 @@ def login():
         # return user to that route after successful login
         next_page = request.args.get("next")
         if not next_page or url_parse(next_page) != "":
-            next_page = url_for("secret")
+            next_page = url_for("account")
 
         return redirect(next_page)
 
@@ -62,10 +59,10 @@ def logout():
 
 
 # Protected route example
-@app.route("/secret")
+@app.route("/account")
 @login_required
-def secret():
-    return render_template("secret.html", title="Secret Page")
+def account():
+    return render_template("account.html", title="Secret Page")
 
 
 @app.route("/register", methods=["GET", "POST"])
@@ -76,8 +73,10 @@ def register():
     if form.validate_on_submit():
         user = User(username=form.username.data)
         user.set_password(form.password.data)
+        # BEGIN TRANSACTION #
         db.session.add(user)
         db.session.commit()
+        # END TRANSACTION #
         flash("Congratulations, you are now a registered user!")
         return redirect(url_for("login"))
     return render_template("register.html", title="Register", form=form)

@@ -9,6 +9,8 @@ def load_user(id):
 
 
 class User(UserMixin, db.Model):  # type: ignore #noqa
+    __tablename__ = "user"
+
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), unique=True, index=True, nullable=False)
     password_hash = db.Column(db.String(255), nullable=False)
@@ -25,22 +27,14 @@ class User(UserMixin, db.Model):  # type: ignore #noqa
 
 
 class Favorite(db.Model):  # type: ignore #noqa
+    __tablename__ = "favorite"
+
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     # player_id = db.Column(db.Integer, db.ForeignKey('people.playerid'))
 
     def __repr__(self):
         return "<User {}>".format(self.username)
-
-
-# class User(db.Model):  # type: ignore # noqa
-#     id = db.Column(db.Integer, primary_key=True)
-#     username = db.Column(db.String(64), index=True, unique=True)
-#     email = db.Column(db.String(120), index=True, unique=True)
-#     password_hash = db.Column(db.String(128))
-
-#     def __repr__(self):
-#         return "<User {}>".format(self.username)
 
 
 class Analysis(db.Model):  # type: ignore # noqa
