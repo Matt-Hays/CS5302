@@ -20,7 +20,8 @@ class E_Record(Enum):
     BATTING = 1
     PITCHERID = 2
     EVENT_TYPE = 3
-    RBI = 4
+    AB_FLAG = 4
+    RBI = 5
 
 
 class G_Record(Enum):
@@ -83,6 +84,7 @@ class Stat:
     W = 0
     IW = 0
     HBP = 0
+    AB = 0
     S = 0
     D = 0
     T = 0
@@ -114,6 +116,7 @@ pitching_against = textwrap.dedent(
     `PB` smallint(6) DEFAULT NULL,
     `W` smallint(6) DEFAULT NULL,
     `IW` smallint(6) DEFAULT NULL,
+    `AB` smallint(6) DEFAULT NULL,
     `H` smallint(6) DEFAULT NULL,
     `2B` smallint(6) DEFAULT NULL,
     `3B` smallint(6) DEFAULT NULL,
@@ -354,6 +357,9 @@ def load_pitching_stats(event_csv: Path) -> None:
             rbi = int(row[E_Record.RBI.value])
             pitcher_stats[pitcherID][(team, year)].RBI += rbi
 
+            if row[E_Record.AB_FLAG.value] == "T":
+                pitcher_stats[pitcherID][(team, year)].AB += 1
+
             if event == E_Type.SO.value:
                 pitcher_stats[pitcherID][(team, year)].SO += 1
             elif event == E_Type.SB.value:
@@ -403,7 +409,7 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
             (
                 "INSERT INTO `PitchingAgainst` (",
                 "`playerID`,`yearID`,`stint`,`teamID`,`lgID`,`SO`,`SB`,`CS`,`PO`,",
-                "`PB`,`W`,`IW`,`H`,`2B`,`3B`,`HR`,`RBI`) VALUES ",
+                "`PB`,`W`,`IW`,`AB`,`H`,`2B`,`3B`,`HR`,`RBI`) VALUES ",
             )
         )
 
@@ -433,7 +439,8 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
                         [
                             f"('{playerID}',{year},{stint_num},'{team}','{league}',",
                             f"{stat.SO},{stat.SB},{stat.CS},{stat.PO},{stat.PB},",
-                            f"{stat.W},{stat.IW},{stat.S + stat.D + stat.T + stat.HR},",
+                            f"{stat.W},{stat.IW},{stat.AB},",
+                            f"{stat.S + stat.D + stat.T + stat.HR},",
                             f"{stat.D},{stat.T},{stat.HR},{stat.RBI}),",
                         ]
                     )

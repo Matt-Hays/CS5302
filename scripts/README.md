@@ -3,7 +3,7 @@
 ## bevent.sh
 [bevent.sh](./bevent.sh) - uses BEVENT.EXE to parse the event files looking for pitcher statistics.
 
-When run against all of the event files, this generated **260MB** worth of data.
+When run against all of the event files, this generated **291MB** worth of data.
 
 ```
 0    game id
@@ -42,7 +42,7 @@ When run against all of the event files, this generated **260MB** worth of data.
     22   Triple
     23   Home run
     24   Missing play
-
+36   AB flag
 43   RBI on play
 ```
 
