@@ -67,6 +67,11 @@ class Stint(Enum):
     YEAR = 1
 
 
+class Site(Enum):
+    PARKKEY = 0
+    YEAR = 1
+
+
 class Teams(Enum):
     YEAR = 0
     TEAMID = 1
@@ -91,8 +96,15 @@ class Stat:
     RBI = 0
 
 
+@dataclass
+class Park:
+    H = 0
+    R = 0
+
+
 games: Dict[str, Dict[str, str]] = {}
 teams: Dict[Tuple[str, int], str] = {}
+park_stats: DefaultDict[Tuple[str, int], Park] = defaultdict(Park)
 pitcher_stats: DefaultDict[str, DefaultDict[Tuple[str, int], Stat]] = defaultdict(
     lambda: defaultdict(Stat)
 )
@@ -122,22 +134,22 @@ def load_games(games_csv: Path) -> None:
             visitor = row[G_Record.VISITOR.value]
             home = row[G_Record.HOME.value]
             site = row[G_Record.SITE.value]
-            pitches = row[G_Record.PITCHES.value]
-            v_score = row[G_Record.V_SCORE.value]
-            h_score = row[G_Record.H_SCORE.value]
-            v_hits = row[G_Record.V_HITS.value]
-            h_hits = row[G_Record.H_HITS.value]
+
+            try:
+                yearID = int(gameID[3:7])
+                v_score = int(row[G_Record.V_SCORE.value])
+                h_score = int(row[G_Record.H_SCORE.value])
+                v_hits = int(row[G_Record.V_HITS.value])
+                h_hits = int(row[G_Record.H_HITS.value])
+            except ValueError:
+                continue
 
             games[gameID] = {
                 "visitor": visitor,
                 "home": home,
-                "site": site,
-                "pitches": pitches,
-                "v_score": v_score,
-                "h_score": h_score,
-                "v_hits": v_hits,
-                "h_hits": h_hits,
             }
+            park_stats[(site, yearID)].H += v_hits + h_hits
+            park_stats[(site, yearID)].R += v_score + h_score
 
 
 def pitcherID_to_playerID(player_csv: Path) -> None:
@@ -369,9 +381,7 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
             stints: List[int] = []
 
             for stint, stat in outerdict.items():
-                # team: str = stint[Stint.TEAMID.value]  # type: ignore
                 year: int = stint[Stint.YEAR.value]  # type: ignore
-                # league = teams[stint]
 
                 stint_num: int = stints.count(year)
                 stints.append(year)
@@ -400,6 +410,16 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
                 ]
 
                 f.write("".join(statement))
+
+    with open("parkStats_insert.sql", "w") as f:
+        statement = ["INSERT INTO parkStats (parkkey, yearID, H, R) VALUES "]
+        for site, park in park_stats.items():
+            parkkey = site[Site.PARKKEY.value]
+            yearID = site[Site.YEAR.value]
+            statement.append(f"('{parkkey}', {yearID}, {park.H}, {park.R}),")
+
+        insert = "".join(statement)[:-1] + ";"
+        f.write(insert)
 
 
 if __name__ == "__main__":

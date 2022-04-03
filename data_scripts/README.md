@@ -58,7 +58,7 @@ When run against all of the eent files, this generated **4.6MB**  worth of data.
 7    visiting team
 8    home team
 9    game site
-25   pitches entered?
+25   pitchers entered?
 34   visitor final score
 35   home final score
 36   visitor hits
