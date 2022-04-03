@@ -1,7 +1,7 @@
 # Scripts
 
 ## bevent.sh
-[bevent.sh](./bevent.sh) - uses BEVENT.EXE to parse the event files looking for pitcher statistics.
+[bevent.sh](../../data_scripts/bevent.sh) - uses BEVENT.EXE to parse the event files looking for pitcher statistics and outputs [all_events.csv](../../data_sources/all_events.csv).
 
 When run against all of the event files, this generated **291MB** worth of data.
 
@@ -49,7 +49,7 @@ When run against all of the event files, this generated **291MB** worth of data.
 The resulting data will need to be summed to get season numbers for each pitcher.
 
 ## bgame.sh
-[bgame.sh](./bgame.sh) - uses BGAME.EXE to parse the event file for game statistics.
+[bgame.sh](../../data_scripts/bgame.sh) - uses BGAME.EXE to parse the event file for game statistics and outputs [all_games.csv](../../data_sources/all_games.csv).
 
 When run against all of the eent files, this generated **4.6MB**  worth of data.
 
@@ -66,4 +66,7 @@ When run against all of the eent files, this generated **4.6MB**  worth of data.
 ```
 
 ## teams.sh
-[teams.sh](./teams.sh) - reads in the teams files (TEAMYYYY), places the year as the first entry, and writes them out to to a file. I then leverage this file to match teams to their league.
+[teams.sh](../../data_scripts/teams.sh) - reads in the teams files (TEAMYYYY), places the year as the first entry, and outputs [teams_combined.csv](../../data_sources/teams_combined.csv).
+
+## stats.py
+[stats.py](../../data_scripts/stats.py) - reads from the various csv files generated with the shell scripts from above and outputs [pitchingAgainst_update.sql](../../Documentation/SQL/pitchingAgainst_update.sql) and [parkStats_insert.sql](../../Documentation/SQL/parkStats_insert.sql).
