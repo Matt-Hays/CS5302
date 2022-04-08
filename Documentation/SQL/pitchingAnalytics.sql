@@ -7,7 +7,7 @@ CREATE TABLE `PitchingAnalytics` (
   `playerID` varchar(9) NOT NULL,
   `yearID` smallint(6) NOT NULL,
   `stint` smallint(6) DEFAULT NULL,
-  `teamID` char(3) DEFAULT NULL, 
+  `teamID` char(3) DEFAULT NULL,
   `lgID`char(2) DEFAULT NULL,
   `TB` smallint(6) DEFAULT NULL, -- total bases
   `TW` decimal(5,2) DEFAULT NULL, -- total walks
@@ -37,10 +37,10 @@ UPDATE PitchingAnalytics
 SET TOB = H+BB+HBP-CS+GIDP; -- CS pulled from Retrosheet data, H/BB/HBP/GIDP already in Pitching table
 
 UPDATE PitchingAnalytics
-SET BA = TB+TW+SS; 
+SET BA = TB+TW+SS;
 
 UPDATE PitchingAnalytics
 SET PA = AB+BB+HBP+SF+SH; -- AB pulled from Retrosheet data, BB/HBP/SF/SH already in Pitching table
 
 UPDATE PitchingAnalytics
-SET RC = (TOB*BA)/PA; 
+SET RC = (TOB*BA)/PA;

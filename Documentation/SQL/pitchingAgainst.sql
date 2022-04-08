@@ -7,11 +7,9 @@ CREATE TABLE `PitchingAgainst` (
   `playerID` varchar(9) NOT NULL,
   `yearID` smallint(6) NOT NULL,
   `stint` smallint(6) DEFAULT NULL,
-  `teamID` char(3) DEFAULT NULL, 
-  `team_ID` int(11) DEFAULT NULL,
+  `teamID` char(3) DEFAULT NULL,
   `lgID`char(2) DEFAULT NULL,
-  `G` smallint(6) DEFAULT NULL, 
-  `G_batting` smallint(6) DEFAULT NULL, 
+  `G` smallint(6) DEFAULT NULL,
   `AB` smallint(6) DEFAULT NULL,
   `R` smallint(6) DEFAULT NULL,
   `H` smallint(6) DEFAULT NULL,
@@ -29,13 +27,13 @@ CREATE TABLE `PitchingAgainst` (
   `SF` smallint(6) DEFAULT NULL,
   `GIDP` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`against_ID`),
-  UNIQUE KEY `against_ID` (`playerID`,`yearID`),
+  UNIQUE KEY `player_ID` (`playerID`,`yearID`,`stint`),
   CONSTRAINT `against_peoplefk` FOREIGN KEY (`playerID`) REFERENCES `people` (`playerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO PitchingAnalytics(playerID, yearID, stint, teamID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP) 
-SELECT playerID, yearID, stint, teamID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP 
+-- insert all rows and columns from the pitching table into the corresponding columns in the PitchingAgainst table
+INSERT INTO PitchingAgainst(playerID, yearID, stint, teamID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP)
+SELECT playerID, yearID, stint, teamID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP
 FROM pitching GROUP BY playerID, yearID;
 
--- not sure what to do about G_batting and team_ID yet as these are not documented on Lahman's website
 -- need to pull AB, 2B, 3B, RBI, SB, and CS from the Retrosheet data
