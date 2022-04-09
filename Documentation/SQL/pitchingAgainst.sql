@@ -1,5 +1,9 @@
 -- Using template from analysis.sql:
 
+--
+-- Table structure for table `pitchingAgainst`
+--
+
 DROP TABLE IF EXISTS `PitchingAgainst`;
 SET character_set_client = utf8mb4;
 CREATE TABLE `PitchingAgainst` (
@@ -31,9 +35,7 @@ CREATE TABLE `PitchingAgainst` (
   CONSTRAINT `against_peoplefk` FOREIGN KEY (`playerID`) REFERENCES `people` (`playerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- insert all rows and columns from the pitching table into the corresponding columns in the PitchingAgainst table
+-- Insert all rows and columns from the pitching table into the corresponding columns in the PitchingAgainst table
 INSERT INTO PitchingAgainst(playerID, yearID, stint, teamID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP)
 SELECT playerID, yearID, stint, teamID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP
 FROM pitching GROUP BY playerID, yearID;
-
--- need to pull AB, 2B, 3B, RBI, SB, and CS from the Retrosheet data
