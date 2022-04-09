@@ -96,15 +96,15 @@ class Stat:
     RBI = 0
 
 
-@dataclass
-class Park:
-    H = 0
-    R = 0
+# @dataclass
+# class Park:
+#     H = 0
+#     R = 0
 
 
 games: Dict[str, Dict[str, str]] = {}
 teams: Dict[Tuple[str, int], str] = {}
-park_stats: DefaultDict[Tuple[str, int], Park] = defaultdict(Park)
+# park_stats: DefaultDict[Tuple[str, int], Park] = defaultdict(Park)
 pitcher_stats: DefaultDict[str, DefaultDict[Tuple[str, int], Stat]] = defaultdict(
     lambda: defaultdict(Stat)
 )
@@ -133,23 +133,23 @@ def load_games(games_csv: Path) -> None:
             gameID = row[G_Record.GAMEID.value]
             visitor = row[G_Record.VISITOR.value]
             home = row[G_Record.HOME.value]
-            site = row[G_Record.SITE.value]
+            # site = row[G_Record.SITE.value]
 
-            try:
-                yearID = int(gameID[3:7])
-                v_score = int(row[G_Record.V_SCORE.value])
-                h_score = int(row[G_Record.H_SCORE.value])
-                v_hits = int(row[G_Record.V_HITS.value])
-                h_hits = int(row[G_Record.H_HITS.value])
-            except ValueError:
-                continue
+            # try:
+            #     yearID = int(gameID[3:7])
+            #     v_score = int(row[G_Record.V_SCORE.value])
+            #     h_score = int(row[G_Record.H_SCORE.value])
+            #     v_hits = int(row[G_Record.V_HITS.value])
+            #     h_hits = int(row[G_Record.H_HITS.value])
+            # except ValueError:
+            #     continue
 
             games[gameID] = {
                 "visitor": visitor,
                 "home": home,
             }
-            park_stats[(site, yearID)].H += v_hits + h_hits
-            park_stats[(site, yearID)].R += v_score + h_score
+            # park_stats[(site, yearID)].H += v_hits + h_hits
+            # park_stats[(site, yearID)].R += v_score + h_score
 
 
 def pitcherID_to_playerID(player_csv: Path) -> None:
@@ -411,15 +411,15 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
 
                 f.write("".join(statement))
 
-    with open("parkStats_insert.sql", "w") as f:
-        statement = ["INSERT INTO parkStats (parkkey, yearID, H, R) VALUES "]
-        for site, park in park_stats.items():
-            parkkey = site[Site.PARKKEY.value]
-            yearID = site[Site.YEAR.value]
-            statement.append(f"('{parkkey}', {yearID}, {park.H}, {park.R}),")
+    # with open("parkStats_insert.sql", "w") as f:
+    #     statement = ["INSERT INTO parkStats (parkkey, yearID, H, R) VALUES "]
+    #     for site, park in park_stats.items():
+    #         parkkey = site[Site.PARKKEY.value]
+    #         yearID = site[Site.YEAR.value]
+    #         statement.append(f"('{parkkey}', {yearID}, {park.H}, {park.R}),")
 
-        insert = "".join(statement)[:-1] + ";"
-        f.write(insert)
+    #     insert = "".join(statement)[:-1] + ";"
+    #     f.write(insert)
 
 
 if __name__ == "__main__":
