@@ -69,4 +69,9 @@ When run against all of the eent files, this generated **4.6MB**  worth of data.
 [teams.sh](../../data_scripts/teams.sh) - reads in the teams files (TEAMYYYY), places the year as the first entry, and outputs [teams_combined.csv](../../data_sources/teams_combined.csv).
 
 ## stats.py
-[stats.py](../../data_scripts/stats.py) - reads from the various csv files generated with the shell scripts from above and outputs [pitchingAgainst_update.sql](../../Documentation/SQL/pitchingAgainst_update.sql) and [parkStats_insert.sql](../../Documentation/SQL/parkStats_insert.sql).
+[stats.py](../../data_scripts/stats.py) - reads from the various csv files generated with the shell scripts from above and outputs [pitchingAgainst_update.sql](../../Documentation/SQL/PitchingAgainst_update.sql). This script attempts to match players to the lahman playerIDs and updates the PitchingAgainst table.
+
+#### Known Issues
+If a player, through multiple stints, ends back up on the same team, stats.py will incorrectly assume they are part of the same stint and combine them. This was discovered late in the process of this project and could not be resolved in a timely manner. This affects roughly 6+ players.
+
+There are players within the Lahman dataset that do not exist in the retrosheets dataset and therefore cannot be updated in the pitchingAgainst table.  This affects affects roughly 3+ players.

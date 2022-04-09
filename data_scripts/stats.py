@@ -396,7 +396,7 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
     pitcherID_to_playerID(players_csv)
     print("[+] PlayerIDs loaded")
 
-    with open("pitchingAgainst_update.sql", "w") as f:
+    with open("PitchingAgainst_update.sql", "w") as f:
 
         for pitcherID, outerdict in pitcher_stats.items():
             stints: List[int] = []
