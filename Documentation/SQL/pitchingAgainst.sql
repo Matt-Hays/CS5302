@@ -1,7 +1,7 @@
 -- Using template from analysis.sql:
 
 --
--- Table structure for table `pitchingAgainst`
+-- Table structure for table `PitchingAgainst`
 --
 
 DROP TABLE IF EXISTS `PitchingAgainst`;

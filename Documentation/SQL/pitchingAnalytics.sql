@@ -1,7 +1,7 @@
 -- Using template from analysis.sql:
 
 --
--- Table structure for table `pitchingAnalytics`
+-- Table structure for table `PitchingAnalytics`
 --
 
 DROP TABLE IF EXISTS `PitchingAnalytics`;
@@ -29,7 +29,7 @@ CREATE TABLE `PitchingAnalytics` (
   CONSTRAINT `analytics_peoplefk` FOREIGN KEY (`playerID`) REFERENCES `people` (`playerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Insert all players from the pitchingAgainst table into the pitchingAnalytics table
+-- Insert all players from the PitchingAgainst table into the PitchingAnalytics table
 INSERT INTO PitchingAnalytics(playerID, yearID, stint, teamID, team_ID, lgID)
 SELECT playerID, yearID, stint, teamID, team_ID, lgID
-FROM pitchingAgainst;
+FROM PitchingAgainst;
