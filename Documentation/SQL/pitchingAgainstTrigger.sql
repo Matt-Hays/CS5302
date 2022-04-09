@@ -4,10 +4,10 @@
 DELIMITER //
 
 CREATE OR REPLACE TRIGGER updatePitchingAgainst
-BEFORE UPDATE ON pitchingAgainst
+BEFORE UPDATE ON PitchingAgainst
 FOR EACH ROW
 BEGIN
-IF (SELECT COUNT(*) FROM pitchingAgainst WHERE playerID = NEW.playerID) = 0 THEN
+IF (SELECT COUNT(*) FROM PitchingAgainst WHERE playerID = NEW.playerID) = 0 THEN
 	INSERT INTO pitchingAgainst(playerid, yearid, stint, teamID, lgID, G, AB, R, H, 2B, 3B, HR, RBI, SB, CS, BB, SO, IBB, HBP, SH, SF, GIDP)
 	VALUES(NULL, NULL, NULL, NULL, NULL, NULL, NEW.AB, NULL, NEW.H, NEW.2B, NEW.3B, NULL, NEW.RBI, NEW.SB, NEW.CS, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 END IF;
