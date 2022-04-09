@@ -4,7 +4,7 @@
 DELIMITER //
 
 CREATE OR REPLACE TRIGGER updatePitchingAnalytics
-AFTER UPDATE ON pitchingAgainst
+AFTER UPDATE ON PitchingAgainst
 FOR EACH ROW
 BEGIN
 UPDATE PitchingAnalytics SET
