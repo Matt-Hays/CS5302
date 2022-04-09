@@ -253,6 +253,27 @@ def pitcherID_to_playerID(player_csv: Path) -> None:
                     and innerdict["debut"] is not None
                     and innerdict["first"] is not None
                 ):
+                    # try with first initial
+                    sql = full_query
+                    records = cursor.execute(
+                        sql,
+                        (
+                            playerID[4].lower() + "%",
+                            playerID[4].lower() + "%",
+                            innerdict["last"].lower(),
+                            innerdict["debut"],
+                        ),
+                    )
+                elif records > 1:
+                    # too many records returned with no further way to filter, giving up
+                    print(f"{playerID} records: {records}")
+                    continue
+
+                if (
+                    records == 0
+                    and innerdict["debut"] is not None
+                    and innerdict["first"] is not None
+                ):
                     # try again with just year for debut
                     # this could possibly introduce errors but is highly unlikely
                     sql = debut_year
