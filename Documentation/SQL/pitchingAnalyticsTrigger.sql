@@ -15,9 +15,9 @@ UPDATE PitchingAnalytics SET
     BA = TB+TW+SS,
     PA = NEW.AB+NEW.BB+NEW.HBP+NEW.SF+NEW.SH,
     RC = (TOB*BA)/PA,
-    PARC = RC/(((SELECT BPF FROM teams WHERE playerID = NEW.playerID AND yearID = NEW.yearID AND stint = NEW.stint)+100)/200),
+    PARC = RC/(((SELECT BPF FROM teams WHERE yearID = NEW.yearID AND teamID = NEW.teamID)+100)/200),
     PARC27 = (PARC*27)/(NEW.AB+NEW.SF+NEW.SH+NEW.CS+NEW.GIDP-NEW.H),
-    PARCA = RC/(((SELECT PPF FROM teams WHERE playerID = NEW.playerID AND yearID = NEW.yearID AND stint = NEW.stint)+100)/200)
+    PARCA = RC/(((SELECT PPF FROM teams WHERE yearID = NEW.yearID AND teamID = NEW.teamID)+100)/200)
 WHERE playerID = NEW.playerID AND yearID = NEW.yearID AND stint = NEW.stint;
 END;
 //
@@ -26,7 +26,7 @@ DELIMITER ;
 
 /*
 -- Test for trigger
-UPDATE PitchingAgainst SET H = 171, 2B = 31, 3B = 2, SB = 22, CS = 0, AB = 705, RBI = 66 WHERE playerID LIKE '%reedro01%' AND yearID = 1974 AND stint = 0;
+UPDATE PitchingAgainst SET H = 171, 2B = 31, 3B = 2, SB = 22, CS = 0, AB = 705, RBI = 66 WHERE playerID LIKE '%reedro01%' AND yearID = 1974 AND stint = 1;
 
 -- Tests for successful update when playerID in Lahman db
 SELECT playerID, yearID, stint, TB, TW, SS, TOB, BA, PA, RC

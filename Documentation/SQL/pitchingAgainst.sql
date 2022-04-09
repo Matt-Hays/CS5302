@@ -12,6 +12,7 @@ CREATE TABLE `PitchingAgainst` (
   `yearID` smallint(6) NOT NULL,
   `stint` smallint(6) DEFAULT NULL,
   `teamID` char(3) DEFAULT NULL,
+  `team_ID` int(11) DEFAULT NULL,
   `lgID`char(2) DEFAULT NULL,
   `G` smallint(6) DEFAULT NULL,
   `AB` smallint(6) DEFAULT NULL,
@@ -31,11 +32,11 @@ CREATE TABLE `PitchingAgainst` (
   `SF` smallint(6) DEFAULT NULL,
   `GIDP` smallint(6) DEFAULT NULL,
   PRIMARY KEY (`against_ID`),
-  UNIQUE KEY `player_ID` (`playerID`,`yearID`,`stint`),
+  UNIQUE KEY `againstID` (`playerID`,`yearID`,`stint`),
   CONSTRAINT `against_peoplefk` FOREIGN KEY (`playerID`) REFERENCES `people` (`playerID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Insert all rows and columns from the pitching table into the corresponding columns in the PitchingAgainst table
-INSERT INTO PitchingAgainst(playerID, yearID, stint, teamID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP)
-SELECT playerID, yearID, stint, teamID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP
-FROM pitching GROUP BY playerID, yearID;
+INSERT INTO PitchingAgainst(playerID, yearID, stint, teamID, team_ID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP)
+SELECT playerID, yearID, stint, teamID, team_ID, lgID, G, R, H, HR, BB, SO, IBB, HBP, SH, SF, GIDP
+FROM pitching;
