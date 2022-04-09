@@ -404,8 +404,8 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
             for stint, stat in outerdict.items():
                 year: int = stint[Stint.YEAR.value]  # type: ignore
 
-                stint_num: int = stints.count(year)
                 stints.append(year)
+                stint_num: int = stints.count(year)
 
                 p = pitcher.get(pitcherID, None)
                 if p is None:
@@ -425,7 +425,7 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
                     f"`CS` = {stat.CS}, ",
                     f"`AB` = {stat.AB}, ",
                     f"`RBI` = {stat.RBI} ",
-                    f"WHERE `playerID` LIKE '{playerID}' ",
+                    f"WHERE `playerID` LIKE '%{playerID}%' ",
                     f"AND yearID = {year} ",
                     f"AND stint = {stint_num};\n",
                 ]
