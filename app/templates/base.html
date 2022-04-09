@@ -1,20 +1,48 @@
-{% import 'components/navigation.html' as nav %}
-
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link
-			rel="stylesheet"
-			href="{{ url_for('static', filename='styles/main.css') }}"
-		/>
-		{% block title %}{% endblock %}
-	</head>
-	<body>
-		{# Navigation #} {{ nav.top_nav() }}
-		<h1>Lahman Baseball Database</h1>
-		{% block content %}{% endblock %}
-	</body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles/base.css') }}" />
+  {% block styles %}{% endblock %}
+  <title>Baseball Database</title>
+</head>
+
+<body>
+  <nav class="top-nav">
+    <a class="nav-logo" href="{{ url_for('index') }}">Baseball Database</a>
+    <ul class="nav-links">
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('players') }}">Players</a>
+      </li>
+    </ul>
+    <ul class="nav-account">
+      {% if current_user.is_anonymous %}
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{{ url_for('login') }}">Login</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+      </li>
+      {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">Logout</a>
+      </li>
+      {% endif %}
+    </ul>
+  </nav>
+  {% block content %}
+  <!---->
+  {% endblock %}
+  <script src="{{ url_for('static', filename='scripts/navActiveState.js') }}"></script>
+</body>
+
 </html>

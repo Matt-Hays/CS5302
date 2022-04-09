@@ -1,0 +1,66 @@
+:root {
+  --input-border: #8b8a8b;
+  --input-focus-h: 200;
+  --input-focus-s: 100%;
+  --input-focus-l: 42%;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.input-container {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-input {
+  margin-top: 1rem;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid var(--input-border);
+  border-radius: 10px;
+  transition: 180ms box-shadow ease-in-out;
+}
+
+.form-input:focus {
+  border-color: hsl(
+    var(--input-focus-h),
+    var(--input-focus-s),
+    var(--input-focus-l)
+  );
+  box-shadow: 0 0 0 3px
+    hsla(
+      var(--input-focus-h),
+      var(--input-focus-s),
+      calc(var(--input-focus-l) + 35%),
+      0.8
+    );
+  outline: 3px solid transparent;
+}
+
+.form-submit {
+  width: 9.25rem;
+  height: 2.25rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  background-color: black;
+  color: white;
+  transition: 150ms background-color ease-in-out;
+}
+
+.form-submit:hover {
+  background-color: hsl(0, 0%, 35%);
+}
+
+.form-submit:active {
+  background-color: hsl(0, 0%, 35%);
+  border: 1px solid white;
+}
