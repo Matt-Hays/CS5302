@@ -96,15 +96,15 @@ class Stat:
     RBI = 0
 
 
-@dataclass
-class Park:
-    H = 0
-    R = 0
+# @dataclass
+# class Park:
+#     H = 0
+#     R = 0
 
 
 games: Dict[str, Dict[str, str]] = {}
 teams: Dict[Tuple[str, int], str] = {}
-park_stats: DefaultDict[Tuple[str, int], Park] = defaultdict(Park)
+# park_stats: DefaultDict[Tuple[str, int], Park] = defaultdict(Park)
 pitcher_stats: DefaultDict[str, DefaultDict[Tuple[str, int], Stat]] = defaultdict(
     lambda: defaultdict(Stat)
 )
@@ -133,23 +133,23 @@ def load_games(games_csv: Path) -> None:
             gameID = row[G_Record.GAMEID.value]
             visitor = row[G_Record.VISITOR.value]
             home = row[G_Record.HOME.value]
-            site = row[G_Record.SITE.value]
+            # site = row[G_Record.SITE.value]
 
-            try:
-                yearID = int(gameID[3:7])
-                v_score = int(row[G_Record.V_SCORE.value])
-                h_score = int(row[G_Record.H_SCORE.value])
-                v_hits = int(row[G_Record.V_HITS.value])
-                h_hits = int(row[G_Record.H_HITS.value])
-            except ValueError:
-                continue
+            # try:
+            #     yearID = int(gameID[3:7])
+            #     v_score = int(row[G_Record.V_SCORE.value])
+            #     h_score = int(row[G_Record.H_SCORE.value])
+            #     v_hits = int(row[G_Record.V_HITS.value])
+            #     h_hits = int(row[G_Record.H_HITS.value])
+            # except ValueError:
+            #     continue
 
             games[gameID] = {
                 "visitor": visitor,
                 "home": home,
             }
-            park_stats[(site, yearID)].H += v_hits + h_hits
-            park_stats[(site, yearID)].R += v_score + h_score
+            # park_stats[(site, yearID)].H += v_hits + h_hits
+            # park_stats[(site, yearID)].R += v_score + h_score
 
 
 def pitcherID_to_playerID(player_csv: Path) -> None:
@@ -246,6 +246,27 @@ def pitcherID_to_playerID(player_csv: Path) -> None:
 
                 if records > 1:
                     # too many records returned with no further way to filter, giving up
+                    continue
+
+                if (
+                    records == 0
+                    and innerdict["debut"] is not None
+                    and innerdict["first"] is not None
+                ):
+                    # try with first initial
+                    sql = full_query
+                    records = cursor.execute(
+                        sql,
+                        (
+                            playerID[4].lower() + "%",
+                            playerID[4].lower() + "%",
+                            innerdict["last"].lower(),
+                            innerdict["debut"],
+                        ),
+                    )
+                elif records > 1:
+                    # too many records returned with no further way to filter, giving up
+                    print(f"{playerID} records: {records}")
                     continue
 
                 if (
@@ -375,7 +396,7 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
     pitcherID_to_playerID(players_csv)
     print("[+] PlayerIDs loaded")
 
-    with open("pitchingAgainst_update.sql", "w") as f:
+    with open("PitchingAgainst_update.sql", "w") as f:
 
         for pitcherID, outerdict in pitcher_stats.items():
             stints: List[int] = []
@@ -383,8 +404,8 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
             for stint, stat in outerdict.items():
                 year: int = stint[Stint.YEAR.value]  # type: ignore
 
-                stint_num: int = stints.count(year)
                 stints.append(year)
+                stint_num: int = stints.count(year)
 
                 p = pitcher.get(pitcherID, None)
                 if p is None:
@@ -404,22 +425,22 @@ def main(games_csv: Path, events_csv: Path, players_csv: Path, teams_csv: Path) 
                     f"`CS` = {stat.CS}, ",
                     f"`AB` = {stat.AB}, ",
                     f"`RBI` = {stat.RBI} ",
-                    f"WHERE `playerID` LIKE '{playerID}' ",
+                    f"WHERE `playerID` LIKE '%{playerID}%' ",
                     f"AND yearID = {year} ",
                     f"AND stint = {stint_num};\n",
                 ]
 
                 f.write("".join(statement))
 
-    with open("parkStats_insert.sql", "w") as f:
-        statement = ["INSERT INTO parkStats (parkkey, yearID, H, R) VALUES "]
-        for site, park in park_stats.items():
-            parkkey = site[Site.PARKKEY.value]
-            yearID = site[Site.YEAR.value]
-            statement.append(f"('{parkkey}', {yearID}, {park.H}, {park.R}),")
+    # with open("parkStats_insert.sql", "w") as f:
+    #     statement = ["INSERT INTO parkStats (parkkey, yearID, H, R) VALUES "]
+    #     for site, park in park_stats.items():
+    #         parkkey = site[Site.PARKKEY.value]
+    #         yearID = site[Site.YEAR.value]
+    #         statement.append(f"('{parkkey}', {yearID}, {park.H}, {park.R}),")
 
-        insert = "".join(statement)[:-1] + ";"
-        f.write(insert)
+    #     insert = "".join(statement)[:-1] + ";"
+    #     f.write(insert)
 
 
 if __name__ == "__main__":
