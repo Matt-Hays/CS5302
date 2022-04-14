@@ -21,7 +21,11 @@ UPDATE PitchingAnalytics SET
         ELSE 0
     END,
     PARC = RC/(((SELECT BPF FROM teams WHERE yearID = NEW.yearID AND teamID = NEW.teamID)+100)/200),
-    PARC27 = (PARC*27)/(NEW.AB+NEW.SF+NEW.SH+NEW.CS+NEW.GIDP-NEW.H),
+    PARC27 =
+        CASE -- avoiding division by 0
+            WHEN (NEW.AB+NEW.SF+NEW.SH+NEW.CS+NEW.GIDP-NEW.H) <> 0 THEN (PARC*27)/(NEW.AB+NEW.SF+NEW.SH+NEW.CS+NEW.GIDP-NEW.H)
+        ELSE 0
+    END,
     PARCA = RC/(((SELECT PPF FROM teams WHERE yearID = NEW.yearID AND teamID = NEW.teamID)+100)/200)
 WHERE playerID = NEW.playerID AND yearID = NEW.yearID AND stint = NEW.stint;
 END;
