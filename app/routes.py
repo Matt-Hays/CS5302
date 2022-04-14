@@ -9,9 +9,7 @@ from app.forms import LoginForm, RegistrationForm, PlayerSearchForm
 # **********
 # INDEX PAGE
 # **********
-
-
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET", "POST"])  # noqa: E302
 @app.route("/index", methods=["GET", "POST"])
 def index():
     # Player Search by Name Form
