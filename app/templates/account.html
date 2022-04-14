@@ -9,6 +9,12 @@
 <!---->
 
 {% block content %}
-<h1>You found my secret!</h1>
+{% if favorites %}
+<ul>
+    {% for favorite in favorites %}
+    <li>{{ favorite.playerID }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 <p>...this route is protected behind Flask-Login</p>
 {% endblock %}

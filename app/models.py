@@ -27,14 +27,49 @@ class User(UserMixin, db.Model):  # type: ignore #noqa
 
 
 class Favorite(db.Model):  # type: ignore #noqa
-    __tablename__ = "favorite"
+    __tablename__ = "favorites"
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-    # player_id = db.Column(db.Integer, db.ForeignKey('people.playerid'))
+    userID = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    playerID = db.Column(db.Integer, db.ForeignKey("people.playerID"), primary_key=True)
 
     def __repr__(self):
-        return "<User {}>".format(self.username)
+        return "<Favorites {} {}>".format(self.userID, self.playerID)
+
+
+class PitchingAnalytics(db.Model):  # type: ignore #noqa
+    __tablename__ = "pitchinganalytics"
+
+    analytics_ID = db.Column(db.Integer, primary_key=True)
+    playerID = db.Column(db.String(255), unique=True)
+    yearID = db.Column(db.Integer)
+    stint = db.Column(db.Integer)
+    teamID = db.Column(db.String(3))
+    team_ID = db.Column(db.Integer)
+    lgID = db.Column(db.String(2))
+    TB = db.Column(db.Integer)
+    TW = db.Column(db.Numeric)
+    SS = db.Column(db.Numeric)
+    TOB = db.Column(db.Integer)
+    BA = db.Column(db.Numeric)
+    PA = db.Column(db.Integer)
+    RC = db.Column(db.Numeric)
+    PARC = db.Column(db.Numeric)
+    PARC27 = db.Column(db.Numeric)
+    PARCA = db.Column(db.Numeric)
+
+    def __repr__(self):
+        return "<Pitching Analytics {}>".format(self.playerID)
+
+
+class People(db.Model):  # type: ignore #noqa
+    __tablename__ = "people"
+
+    playerID = db.Column(db.String(9), primary_key=True)
+    nameFirst = db.Column("nameFirst", db.String(255))
+    nameLast = db.Column("nameLast", db.String(255))
+
+    def __repr__(self):
+        return "<People {}>".format(self.playerID)
 
 
 class Analysis(db.Model):  # type: ignore # noqa

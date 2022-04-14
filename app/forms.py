@@ -4,6 +4,13 @@ from wtforms.validators import DataRequired, ValidationError, EqualTo
 from app.models import User
 
 
+class PlayerSearchForm(FlaskForm):
+    player_search = StringField("Player Search", validators=[DataRequired()])
+    search_submit = SubmitField("Search")
+    player_id = StringField("Player ID")
+    favorite_submit = SubmitField("Add to Favorites")
+
+
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = PasswordField("Password", validators=[DataRequired()])
