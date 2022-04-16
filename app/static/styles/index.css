@@ -1,0 +1,53 @@
+.player-table {
+    width: 100%;
+    height: 100%;
+}
+
+.player-table-head {
+    height: 4rem;
+}
+
+.player-table-rows {
+    text-align: center;
+}
+
+.player-table-rows td {
+    border-bottom: 1px solid black;
+    padding: 1rem 0;
+}
+
+.player-name {
+    margin-left: 4rem;
+    font-weight: bold;
+}
+
+.player-name span {
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.player-table-name {
+    text-align: center;
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.favorites-btn {
+    margin-left: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    height: 2rem !important;
+    width: 8rem !important;
+    position: relative;
+    top: 10px;
+}
+
+.player-name-and-btn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.page-header {
+    margin: 2rem 0 2rem 4rem;
+}

@@ -10,13 +10,13 @@
 {% endblock %}
 <!---->
 {% block content %}
-<h1>Login</h1>
+<h1 class="page-header">Login</h1>
 {% with messages = get_flashed_messages() %}
 <!---->
 {% if messages %}
 <!---->
 {% for message in messages %}
-<span style="color: red">{{message}}</span>
+<p class="flash-message"><span style="color: red">{{message}}</span></p>
 {% endfor %}
 <!---->
 {% endif %}
