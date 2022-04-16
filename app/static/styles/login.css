@@ -101,3 +101,12 @@ input[type="checkbox"]:focus {
   background-color: hsl(0, 0%, 35%);
   border: 1px solid white;
 }
+
+.page-header {
+  text-align: center;
+  margin: 2rem 0;
+}
+.flash-message {
+  text-align: center;
+  margin: 1rem 0;
+}

@@ -36,7 +36,7 @@ def index():
             error = str(e.__dict__["orig"])
             logging.error(error)
 
-        if playerID is not None:
+        if playerID and playerID is not None:
             # If we have a playerid, search the pitchinganalytics table by the playerid
             try:
                 players = PitchingAnalytics.query.filter_by(playerID=playerID).all()
@@ -55,7 +55,8 @@ def index():
 
     # If there is no search, provide random default player pitching analytics.
     # NOTE: We query the pitching table to reduce the liklihood that we don't
-    # have pitchingAnalytics for the response
+    # have pitchingAnalytics for the response, then querying the People table
+    # to obtain the first & last name.
     try:
         randPlayerId = (
             Pitching.query.filter(Pitching.yearID >= "1974")
@@ -63,12 +64,6 @@ def index():
             .first()
             .playerID
         )
-    except SQLAlchemyError as e:
-        error = str(e.__dict__["orig"])
-        logging.error(error)
-
-    # Query the person table to get the First and Last names
-    try:
         randPerson = People.query.filter_by(playerID=randPlayerId).first()
     except SQLAlchemyError as e:
         error = str(e.__dict__["orig"])
@@ -78,7 +73,7 @@ def index():
     lName = randPerson.nameLast
 
     # Ensure we have a valid query result
-    if randPlayerId is not None:
+    if randPlayerId and randPlayerId is not None:
         # Query for the Pitching Analytics data
         try:
             randomPitchingStats = PitchingAnalytics.query.filter_by(
@@ -125,9 +120,10 @@ def index():
 def favorites():
     # Calculate POSTs first to eliminate unecessary data accesses
     if request.method == "POST":
-        user = Favorite(userID=session["_user_id"], playerID=request.form["player_id"])
-
         try:
+            user = Favorite(
+                userID=session["_user_id"], playerID=request.form["player_id"]
+            )
             db.session.add(user)
             db.session.commit()
         except SQLAlchemyError as e:
@@ -192,17 +188,10 @@ def register():
 
     # Determine if a valid form has been submitted
     if form.validate_on_submit():
-        # Try to query for the user, catch any errors
+        # Try to query for the user & add to db, catch any errors
         try:
             user = User(username=form.username.data)
-        except SQLAlchemyError as e:
-            error = str(e.__dict__["orig"])
-            logging.error(error)
-
-        user.set_password(form.password.data)
-
-        # Try to add the user to the db, catch any errors
-        try:
+            user.set_password(form.password.data)
             db.session.add(user)
             db.session.commit()
         except SQLAlchemyError as e:

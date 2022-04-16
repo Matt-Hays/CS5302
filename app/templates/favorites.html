@@ -3,14 +3,22 @@
 <!---->
 
 {% block styles %}
-{# <link rel="stylesheet" href="{{ url_for('styles/account.css') }}" /> #}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/favorites.css') }}"
+/>
 {% endblock %}
 
 <!---->
 
 {% block content %}
+<h2 class="page-header">My Favorite Players</h2>
 {% if favorites %}
-<ul>
+<ul class="favorites-list">
     {% for favorite in favorites %}
     <li><a href="{{ url_for('favorites', playerid=favorite.playerID, firstName=favorite.nameFirst, lastName=favorite.nameLast) }}">{{ favorite.nameFirst }} {{ favorite.nameLast }}</a></li>
     {% endfor %}
@@ -18,12 +26,13 @@
 {% endif %}
 
 {% if player_data %}
-<h2>{{ firstName }} {{ lastName }}</h2>
+<h2 class="favorites-name">Player: <span>{{ firstName }} {{ lastName }}</span></h2>
 
-<table>
-    <tr>
-        <th>Analytics ID</th>
-        <th>Player ID</th>
+<table class="player-table">
+    <tr class="player-table-name">
+        <td>Pitching Statistics</td>
+    </tr>
+    <tr class="player-table-head">
         <th>Year ID</th>
         <th>Stint</th>
         <th>Team ID</th>
@@ -42,9 +51,7 @@
 
     {% for stat in player_data %}
 
-    <tr>
-        <td>{{ stat.analytics_ID }}</td>
-        <td>{{ stat.playerID }}</td>
+    <tr class="player-table-rows">
         <td>{{ stat.yearID }}</td>
         <td>{{ stat.stint }}</td>
         <td>{{ stat.teamID }}</td>

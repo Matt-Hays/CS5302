@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 
 <!---->
+{% block styles %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/login.css') }}"
+/>
+{% endblock %}
 
 {% block content %}
 
-<h1>Baseball Database</h1>
-
+<h1 class="page-header">Baseball Database</h1>
 
 
 <form action="" method="POST" novalidate class="login-form">
@@ -13,7 +22,7 @@
     <p class="input-container">
         {{ form.player_search.label }}
         <!---->
-        {{ form.player_search(size=32, class_="form-input") }}
+        {{ form.player_search(size=32, class_="form-input", placeholder="<First Name> <Last Name>") }}
         <!---->
         {% for error in form.player_search.errors %}
         <span style="color: red">{{ error }}</span>
@@ -23,25 +32,30 @@
 </form>
 
 {% if players %}
-
-<h2>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</h2>
-
 {% if not current_user.is_anonymous %}
-<form action="{{ url_for('favorites') }}" method="POST" novalidate>
-    {{ form.hidden_tag() }}
-    <p>
-        {{ form.player_id(value=players[0].playerID, hidden=True) }}
-    </p>
-    <p>
-        {{ form.favorite_submit() }}
-    </p>
-</form>
+<div class="player-name-and-btn">
+    <h2 class="player-name">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
+
+    <form action="{{ url_for('favorites') }}" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.player_id(value=players[0].playerID, hidden=True) }}
+        </p>
+        <p>
+            {{ form.favorite_submit(class_="form-submit favorites-btn") }}
+        </p>
+    </form>
+</div>
+{% else %}
+<h2 class="player-name" style="margin-bottom: 2rem">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
 {% endif %}
 
-<table>
-    <tr>
-        <th>Analytics ID</th>
-        <th>Player ID</th>
+
+<table class="player-table">
+    <tr class="player-table-name">
+        <td>Pitching Statistics</td>
+    </tr>
+    <tr class="player-table-head">
         <th>Year ID</th>
         <th>Stint</th>
         <th>Team ID</th>
@@ -60,9 +74,7 @@
 
     {% for player in players %}
 
-    <tr>
-        <td>{{ player.analytics_ID }}</td>
-        <td>{{ player.playerID }}</td>
+    <tr class="player-table-rows">
         <td>{{ player.yearID }}</td>
         <td>{{ player.stint }}</td>
         <td>{{ player.teamID }}</td>

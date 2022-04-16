@@ -1,11 +1,22 @@
+import logging
+from sqlalchemy.exc import SQLAlchemyError
 from app import db, login  # noqa
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_login import UserMixin
 
 
+logging.basicConfig(filename="errors.log")
+
+
 @login.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    try:
+        user = User.query.get(int(id))
+    except SQLAlchemyError as e:
+        error = str(e.__dict__["orig"])
+        logging.error(error)
+
+    return user
 
 
 class User(UserMixin, db.Model):  # type: ignore #noqa
