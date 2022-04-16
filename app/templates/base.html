@@ -17,9 +17,6 @@
       <li class="nav-item">
         <a class="nav-link" aria-current="page" href="{{ url_for('index') }}">Home</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('players') }}">Players</a>
-      </li>
     </ul>
     <ul class="nav-account">
       {% if current_user.is_anonymous %}
@@ -31,7 +28,7 @@
       </li>
       {% else %}
       <li class="nav-item">
-        <a class="nav-link" href="{{ url_for('account') }}">Account</a>
+        <a class="nav-link" href="{{ url_for('favorites') }}">Favorites</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" aria-current="page" href="{{ url_for('logout') }}">Logout</a>

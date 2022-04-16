@@ -28,7 +28,7 @@ CREATE TABLE `analysis` (
   `OBP` numeric(5,3) DEFAULT NULL,
   `TB` smallint(6) DEFAULT NULL,
   `RC` numeric(5,1) DEFAULT NULL,
-  `RC27` numeric(5,2) DEFAULT NULL,
+  `RC27` numeric(5,2) DEFAULT NULL
   PRIMARY KEY (`analysis_ID`),
   UNIQUE KEY `analysisID` (`playerID`,`yearID`),
   CONSTRAINT `analysis_peoplefk` FOREIGN KEY (`playerID`) REFERENCES `people` (`playerID`)

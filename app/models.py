@@ -9,7 +9,7 @@ def load_user(id):
 
 
 class User(UserMixin, db.Model):  # type: ignore #noqa
-    __tablename__ = "user"
+    __tablename__ = "users"
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), unique=True, index=True, nullable=False)
@@ -29,11 +29,22 @@ class User(UserMixin, db.Model):  # type: ignore #noqa
 class Favorite(db.Model):  # type: ignore #noqa
     __tablename__ = "favorites"
 
-    userID = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+    userID = db.Column(db.Integer, db.ForeignKey("users.id"), primary_key=True)
     playerID = db.Column(db.Integer, db.ForeignKey("people.playerID"), primary_key=True)
 
     def __repr__(self):
         return "<Favorites {} {}>".format(self.userID, self.playerID)
+
+
+class Pitching(db.Model):  # type: ignore #noqa
+    __tablename__ = "pitching"
+
+    ID = db.Column("ID", db.Integer, primary_key=True)
+    playerID = db.Column("playerID", db.String(9), unique=True)
+    yearID = db.Column("yearID", db.Integer)
+
+    def __repr__(self):
+        return "<Pitching {} {}>".format(self.playerID, self.yearID)
 
 
 class PitchingAnalytics(db.Model):  # type: ignore #noqa
@@ -67,6 +78,7 @@ class People(db.Model):  # type: ignore #noqa
     playerID = db.Column(db.String(9), primary_key=True)
     nameFirst = db.Column("nameFirst", db.String(255))
     nameLast = db.Column("nameLast", db.String(255))
+    finalGameDate = db.Column("finalgame_date", db.Date())
 
     def __repr__(self):
         return "<People {}>".format(self.playerID)
