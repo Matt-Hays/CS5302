@@ -14,9 +14,18 @@ UPDATE PitchingAnalytics SET
     TOB = NEW.H+NEW.BB+NEW.HBP-NEW.CS+NEW.GIDP,
     BA = TB+TW+SS,
     PA = NEW.AB+NEW.BB+NEW.HBP+NEW.SF+NEW.SH,
-    RC = (TOB*BA)/PA,
+    RC =
+        CASE -- avoiding division by 0
+            WHEN PA IS NOT NULL AND PA <> 0 THEN (TOB*BA)/PA
+            WHEN PA IS NULL THEN NULL
+        ELSE 0
+    END,
     PARC = RC/(((SELECT BPF FROM teams WHERE yearID = NEW.yearID AND teamID = NEW.teamID)+100)/200),
-    PARC27 = (PARC*27)/(NEW.AB+NEW.SF+NEW.SH+NEW.CS+NEW.GIDP-NEW.H),
+    PARC27 =
+        CASE -- avoiding division by 0
+            WHEN (NEW.AB+NEW.SF+NEW.SH+NEW.CS+NEW.GIDP-NEW.H) <> 0 THEN (PARC*27)/(NEW.AB+NEW.SF+NEW.SH+NEW.CS+NEW.GIDP-NEW.H)
+        ELSE 0
+    END,
     PARCA = RC/(((SELECT PPF FROM teams WHERE yearID = NEW.yearID AND teamID = NEW.teamID)+100)/200)
 WHERE playerID = NEW.playerID AND yearID = NEW.yearID AND stint = NEW.stint;
 END;
