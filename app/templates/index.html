@@ -1,9 +1,100 @@
 {% extends 'base.html' %}
 
 <!---->
+{% block styles %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/login.css') }}"
+/>
+{% endblock %}
 
 {% block content %}
 
-<h1>Baseball Database</h1>
+<h1 class="page-header">Baseball Database</h1>
+
+
+<form action="" method="POST" novalidate class="login-form">
+    {{ form.hidden_tag() }}
+    <p class="input-container">
+        {{ form.player_search.label }}
+        <!---->
+        {{ form.player_search(size=32, class_="form-input", placeholder="<First Name> <Last Name>") }}
+        <!---->
+        {% for error in form.player_search.errors %}
+        <span style="color: red">{{ error }}</span>
+        {% endfor %}
+    </p>
+    <p class="input-container">{{ form.search_submit(class_="form-submit") }}</p>
+</form>
+
+{% if players %}
+{% if not current_user.is_anonymous %}
+<div class="player-name-and-btn">
+    <h2 class="player-name">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
+
+    <form action="{{ url_for('favorites') }}" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.player_id(value=players[0].playerID, hidden=True) }}
+        </p>
+        <p>
+            {{ form.favorite_submit(class_="form-submit favorites-btn") }}
+        </p>
+    </form>
+</div>
+{% else %}
+<h2 class="player-name" style="margin-bottom: 2rem">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
+{% endif %}
+
+
+<table class="player-table">
+    <tr class="player-table-name">
+        <td>Pitching Statistics</td>
+    </tr>
+    <tr class="player-table-head">
+        <th>Year ID</th>
+        <th>Stint</th>
+        <th>Team ID</th>
+        <th>League ID</th>
+        <th>TW</th>
+        <th>TB</th>
+        <th>SS</th>
+        <th>TOB</th>
+        <th>BA</th>
+        <th>PA</th>
+        <th>RC</th>
+        <th>PARC</th>
+        <th>PARC27</th>
+        <th>PARCA</th>
+    </tr>
+
+    {% for player in players %}
+
+    <tr class="player-table-rows">
+        <td>{{ player.yearID }}</td>
+        <td>{{ player.stint }}</td>
+        <td>{{ player.teamID }}</td>
+        <td>{{ player.lgID }}</td>
+        <td>{{ player.TB }}</td>
+        <td>{{ player.TW }}</td>
+        <td>{{ player.SS }}</td>
+        <td>{{ player.TOB }}</td>
+        <td>{{ player.BA }}</td>
+        <td>{{ player.PA }}</td>
+        <td>{{ player.RC }}</td>
+        <td>{{ player.PARC }}</td>
+        <td>{{ player.PARC27 }}</td>
+        <td>{{ player.PARCA }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+{% endif %}
 
 {% endblock %}

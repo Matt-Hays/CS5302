@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+
+<!---->
+
+{% block styles %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/index.css') }}"
+/>
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles/favorites.css') }}"
+/>
+{% endblock %}
+
+<!---->
+
+{% block content %}
+<h2 class="page-header">My Favorite Players</h2>
+{% if favorites %}
+<ul class="favorites-list">
+    {% for favorite in favorites %}
+    <li><a href="{{ url_for('favorites', playerid=favorite.playerID, firstName=favorite.nameFirst, lastName=favorite.nameLast) }}">{{ favorite.nameFirst }} {{ favorite.nameLast }}</a></li>
+    {% endfor %}
+</ul>
+{% endif %}
+
+{% if player_data %}
+<h2 class="favorites-name">Player: <span>{{ firstName }} {{ lastName }}</span></h2>
+
+<table class="player-table">
+    <tr class="player-table-name">
+        <td>Pitching Statistics</td>
+    </tr>
+    <tr class="player-table-head">
+        <th>Year ID</th>
+        <th>Stint</th>
+        <th>Team ID</th>
+        <th>League ID</th>
+        <th>TW</th>
+        <th>TB</th>
+        <th>SS</th>
+        <th>TOB</th>
+        <th>BA</th>
+        <th>PA</th>
+        <th>RC</th>
+        <th>PARC</th>
+        <th>PARC27</th>
+        <th>PARCA</th>
+    </tr>
+
+    {% for stat in player_data %}
+
+    <tr class="player-table-rows">
+        <td>{{ stat.yearID }}</td>
+        <td>{{ stat.stint }}</td>
+        <td>{{ stat.teamID }}</td>
+        <td>{{ stat.lgID }}</td>
+        <td>{{ stat.TB }}</td>
+        <td>{{ stat.TW }}</td>
+        <td>{{ stat.SS }}</td>
+        <td>{{ stat.TOB }}</td>
+        <td>{{ stat.BA }}</td>
+        <td>{{ stat.PA }}</td>
+        <td>{{ stat.RC }}</td>
+        <td>{{ stat.PARC }}</td>
+        <td>{{ stat.PARC27 }}</td>
+        <td>{{ stat.PARCA }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+{% endblock %}

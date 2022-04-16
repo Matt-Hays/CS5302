@@ -1,5 +1,15 @@
 # CS5302 Database Project
 
+## Recreate Database
+All SQL scripts necessary to recreate the database are included within the Documentation/SQL/ directory. Run the following script sequence in order to recreate the database.
+1. lahman2019.sql
+1. createAuth.sql
+1. analysis.sql
+1. pitchingAgainst.sql
+1. pitchingAnalytics.sql
+1. pitchingAnalyticsTrigger.sql
+1. pitchingAgainst_update.sql *NOTE: This script will take approximately 10 minutes to run.*
+
 ## Virtual Environment
 A virtual environment will allow for the installation of the required packaged (as specified in *requirements.txt*). There are a number of ways to do this.  One of the easiest ways is to use the [venv](https://docs.python.org/3/library/venv.html) module.  You may have to install this first (`pip install venv`). Once installed:
 1. Create a new virtual environment: `python3 -m venv venv`

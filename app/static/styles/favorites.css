@@ -1,0 +1,31 @@
+.page-header {
+    margin: 2rem 0 2rem 4rem
+}
+
+.favorites-name {
+    margin-left: 4rem;
+    margin-bottom: 2rem;
+}
+
+.favorites-name span {
+    font-weight: normal;
+    text-decoration: underline;
+}
+
+.favorites-list {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 10px;
+    grid-auto-rows: 20px;
+    grid-auto-flow: row;
+    margin: 2rem 0 4rem 4rem;
+}
+
+.favorites-list li {
+    grid-column: span 2;
+}
+
+.favorites-list a {
+    color: blue;
+    text-decoration: underline;
+}
