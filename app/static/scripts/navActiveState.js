@@ -5,7 +5,7 @@
 
   // Get all of our nav-links in an array
   const navLinks = document.getElementsByClassName("nav-link");
-  let index, players, login, register, account;
+  let index, favorites, login, register;
 
   // Assign all possible routes to their respective variables
   for (let i = 0; i < navLinks.length; i++) {
@@ -14,12 +14,9 @@
       case "/":
         index = navLinks[i];
         break;
+
       case "/index":
         index = navLinks[i];
-        break;
-
-      case "/players":
-        players = navLinks[i];
         break;
 
       case "/login":
@@ -30,12 +27,11 @@
         register = navLinks[i];
         break;
 
-      case '/account':
-        account = navLinks[i];
+      case '/favorites':
+        favorites = navLinks[i];
         break;
 
       default:
-        console.error(`Invalid page link detected: Pathname ${navLinks[i]}`);
         break;
     }
   }
@@ -46,12 +42,9 @@
     case "/":
       index.classList.add("active-nav");
       break;
+
     case "/index":
       index.classList.add("active-nav");
-      break;
-
-    case "/players":
-      players.classList.add("active-nav");
       break;
 
     case "/login":
@@ -62,8 +55,8 @@
       register.classList.add("active-nav");
       break;
 
-    case '/account':
-      account.classList.add("active-nav")
+    case '/favorites':
+      favorites.classList.add("active-nav")
       break;
 
     default:

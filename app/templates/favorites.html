@@ -37,8 +37,8 @@
         <th>Stint</th>
         <th>Team ID</th>
         <th>League ID</th>
-        <th>TW</th>
         <th>TB</th>
+        <th>TW</th>
         <th>SS</th>
         <th>TOB</th>
         <th>BA</th>
@@ -51,6 +51,7 @@
 
     {% for stat in player_data %}
 
+    {% if stat.PARCA is not none %}
     <tr class="player-table-rows">
         <td>{{ stat.yearID }}</td>
         <td>{{ stat.stint }}</td>
@@ -67,7 +68,10 @@
         <td>{{ stat.PARC27 }}</td>
         <td>{{ stat.PARCA }}</td>
     </tr>
+    {% endif %}
+
     {% endfor %}
+
     {% endif %}
 
 {% endblock %}

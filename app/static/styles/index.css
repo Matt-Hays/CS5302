@@ -24,12 +24,13 @@
 .player-name span {
     font-weight: normal;
     text-decoration: underline;
+    margin-left: 0.5rem;
 }
 
 .player-table-name {
     text-align: center;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.75rem;
 }
 
 .favorites-btn {
@@ -46,6 +47,7 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+    margin: 2rem 0;
 }
 
 .page-header {

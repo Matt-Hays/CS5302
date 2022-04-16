@@ -17,7 +17,7 @@
 <h1 class="page-header">Baseball Database</h1>
 
 
-<form action="" method="POST" novalidate class="login-form">
+<form action="" method="POST" novalidate class="search-form">
     {{ form.hidden_tag() }}
     <p class="input-container">
         {{ form.player_search.label }}
@@ -32,10 +32,10 @@
 </form>
 
 {% if players %}
-{% if not current_user.is_anonymous %}
 <div class="player-name-and-btn">
     <h2 class="player-name">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
 
+    {% if not current_user.is_anonymous %}
     <form action="{{ url_for('favorites') }}" method="POST" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -45,11 +45,9 @@
             {{ form.favorite_submit(class_="form-submit favorites-btn") }}
         </p>
     </form>
-</div>
-{% else %}
-<h2 class="player-name" style="margin-bottom: 2rem">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
-{% endif %}
+    {% endif %}
 
+</div>
 
 <table class="player-table">
     <tr class="player-table-name">
@@ -60,8 +58,8 @@
         <th>Stint</th>
         <th>Team ID</th>
         <th>League ID</th>
-        <th>TW</th>
         <th>TB</th>
+        <th>TW</th>
         <th>SS</th>
         <th>TOB</th>
         <th>BA</th>
@@ -74,6 +72,7 @@
 
     {% for player in players %}
 
+    {% if player.PARCA is not none %}
     <tr class="player-table-rows">
         <td>{{ player.yearID }}</td>
         <td>{{ player.stint }}</td>
@@ -90,6 +89,7 @@
         <td>{{ player.PARC27 }}</td>
         <td>{{ player.PARCA }}</td>
     </tr>
+    {% endif %}
 
     {% endfor %}
 
