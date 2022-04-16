@@ -1,5 +1,6 @@
 --
 -- Table structure for table `BattingAnalytics`
+-- Based on analysis table used during course
 --
 
 DROP TABLE IF EXISTS `BattingAnalytics`;

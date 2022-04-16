@@ -1,5 +1,7 @@
+--
 -- Using template from trigger.sql
 -- Every time PitchingAgainst is updated with Retrosheets data, update PitchingAnalytics with calculation results
+--
 
 DELIMITER //
 

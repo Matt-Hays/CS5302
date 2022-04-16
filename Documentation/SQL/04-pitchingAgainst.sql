@@ -1,7 +1,6 @@
--- Using template from analysis.sql:
-
 --
 -- Table structure for table `PitchingAgainst`
+-- Based on analysis table used during course
 --
 
 DROP TABLE IF EXISTS `PitchingAgainst`;

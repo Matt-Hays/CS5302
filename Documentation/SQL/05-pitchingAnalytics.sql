@@ -1,5 +1,3 @@
--- Using template from analysis.sql:
-
 --
 -- Table structure for table `PitchingAnalytics`
 --
