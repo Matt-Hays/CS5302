@@ -45,6 +45,8 @@ When the web application loads, perform the following actions:
 4. To add a (searched for or randomly generated) player to your Favorites, click the `Add to Favorites` button. 
 5. Navigate to the Favorites page in the upper right to view your favorite players and re-load their data.
 
+## Project Contents
+* The ER Diagrams for this project are located in the Documentation folder.
 
 ## Project Creation Notes -- do not include this in project submission
 
