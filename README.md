@@ -1,13 +1,13 @@
 # CS5302 Database Project
 The following documentation describes how to (1) configure the version of the Lahman database that has been augmented using data provided by Retrosheets and (2) generate the web pages that were created for the CSI 5302 group project by the team consisting of Matthew Hayes, Sarah Smallwood, and Joshua Wellman. 
 
-Information regarding the original Lahman database can be found at: https://www.seanlahman.com/files/database/readme2017.txt. 
-Original Retrosheets data can be found at: https://retrosheet.org/.
+Information regarding the original Lahman database can be found at: [lahman](https://www.seanlahman.com/files/database/readme2017.txt). 
+Original Retrosheets data can be found at: [retrosheets](https://retrosheet.org/).
 
 **NOTE: When viewing the database through the web app, we are intentionally filtering out data prior to 1974, as this is as far back as the Retrosheets data goes.**
 
 ## Recreate Database
-All SQL scripts necessary to recreate the database are included within the Documentation/SQL/ directory. Run the following script sequence in order to recreate the database.
+All SQL scripts necessary to recreate our augmented version of the Lahman database are included within the Documentation/SQL/ directory. Run the following script sequence in order to recreate the database.
 1. createDB.sql
 2. createAuth.sql
 3. lahman2019.sql
@@ -19,11 +19,11 @@ All SQL scripts necessary to recreate the database are included within the Docum
 9. favorites.sql
 
 ## Virtual Environment
-A virtual environment will allow for the installation of the required packaged (as specified in *requirements.txt*). There are a number of ways to do this.  One of the easiest ways is to use the [venv](https://docs.python.org/3/library/venv.html) module.  You may have to install this first (`pip install venv`). Once installed:
+A virtual environment will allow for the installation of the required packages (as specified in *requirements.txt*). There are a number of ways to do this. One of the easiest ways is to use the [venv](https://docs.python.org/3/library/venv.html) module. You may have to install this first (`pip install venv`). Once installed:
 1. Create a new virtual environment: `python3 -m venv venv`
-1. Activate the new virtual environment on Linux: `source venv/bin/activate`
+2. Activate the new virtual environment on Linux: `source venv/bin/activate`
 	* For Windows activation, run the venv/bin/Activate.ps1 Powershell script.  If it won't run, you may have to adjust the Powershell Execution Policy via `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser` from a Powershell prompt.
-1. Install packages: `pip install -r requirements.txt`
+3. Install packages: `pip install -r requirements.txt`
 
 ### Necessary Packages - See requirements.txt
 If you have to install new packages, make sure you have activated the virtual environment as described above.  Once activated, `pip install NEWPACKAGE`. Make sure you updated requirements.txt via `pip freeze > requirements.txt`.
