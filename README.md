@@ -33,6 +33,10 @@ In order to launch the web app, you will need to enter `flask run` from within t
 * username: web
 * password: dbrules
 
+
+
+## Project Creation Notes -- do not include this in project submission
+
 This repository is intended for us to work on the project together from a distance.
 
 If you have any questions or trouble pushing/pulling/forking the repo, please let someone know.
