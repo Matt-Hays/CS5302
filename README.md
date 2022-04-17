@@ -4,7 +4,7 @@ The following documentation describes how to (1) configure the version of the La
 Information regarding the original Lahman database can be found at: [lahman](https://www.seanlahman.com/files/database/readme2017.txt). 
 Original Retrosheets data can be found at: [retrosheets](https://retrosheet.org/).
 
-**NOTE: When viewing the database through the web app, we are intentionally filtering out data prior to 1974, as this is as far back as the Retrosheets data goes.**
+**NOTE: When viewing the database through the web app, we are intentionally filtering out data prior to 1974, as the project requirements did not require Retrosheets data prior to 1974.**
 
 ## Recreate Database
 All SQL scripts necessary to recreate our augmented version of the Lahman database are included within the Documentation/SQL/ directory. Run the following script sequence in order to recreate the database.
