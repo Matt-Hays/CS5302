@@ -97,7 +97,7 @@ class People(db.Model):  # type: ignore #noqa
 
 # Batting Analytics
 class BattingAnalytics(db.Model):  # type: ignore # noqa
-    __tablename__ = "battinganalytics"  # required
+    __tablename__ = "BattingAnalytics"  # required
 
     ID = db.Column(db.Integer, primary_key=True)  # required
     playerID = db.Column(db.String(9))
