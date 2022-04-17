@@ -26,6 +26,6 @@
 }
 
 .favorites-list a {
-    color: blue;
+    /* color: blue; */
     text-decoration: underline;
 }

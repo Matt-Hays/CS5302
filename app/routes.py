@@ -4,7 +4,14 @@ from sqlalchemy.sql.expression import func
 from app import app, db
 from werkzeug.urls import url_parse
 from flask_login import current_user, login_required, login_user, logout_user
-from app.models import Favorite, Pitching, User, PitchingAnalytics, People
+from app.models import (
+    BattingAnalytics,
+    Favorite,
+    Pitching,
+    User,
+    PitchingAnalytics,
+    People,
+)
 from app.forms import LoginForm, RegistrationForm, PlayerSearchForm
 import logging
 
@@ -20,18 +27,75 @@ def index():
     # Player Search by Name Form
     form = PlayerSearchForm()
 
+    if request.args:
+        playerID = request.args["playerid"]
+        fName = request.args["firstName"]
+        lName = request.args["lastName"]
+
+        try:
+            player = PitchingAnalytics.query.filter_by(playerID=playerID).all()
+            playerBatting = BattingAnalytics.query.filter_by(playerID=playerID).all()
+        except SQLAlchemyError as e:
+            error = str(e.__dict__["orig"])
+            logging.error(error)
+
+        if player == []:
+            return render_template(
+                "index.html",
+                nameFirst=fName,
+                nameLast=lName,
+                form=form,
+                players=player,
+                player_batting=playerBatting,
+                message="Return to the Home page for additional player searching!",
+                pID=playerID,
+            )
+
+        return render_template(
+            "index.html",
+            nameFirst=fName,
+            nameLast=lName,
+            form=form,
+            players=player,
+            player_batting=playerBatting,
+            message="Return to the Home page for additional player searching!",
+        )
+
     # Check that a valid form has been submitted
     if form.validate_on_submit():
         # Gather, trim, and split the search into a firstname and lastname
         search_query = form.player_search.data.split(" ")
+        if len(search_query) != 2:
+            return render_template(
+                "index.html",
+                form=form,
+                search_error_message=(
+                    "Please enter <First Name> <Last Name> in the search bar!"
+                ),
+            )
+
         fName = search_query[0].strip().lower()
         lName = search_query[1].strip().lower()
-
         # Search by first and last name - recover the playerid
         try:
-            playerID = (
-                People.query.filter_by(nameFirst=fName, nameLast=lName).first().playerID
-            )
+            people = People.query.filter_by(nameFirst=fName, nameLast=lName).all()
+            if len(people) > 1:
+                return render_template(
+                    "index.html",
+                    nameFirst=fName,
+                    nameLast=lName,
+                    form=form,
+                    people=people,
+                )
+            elif len(people) == 1:
+                playerID = people[0].playerID
+            else:
+                return render_template(
+                    "index.html",
+                    form=form,
+                    search_error_message="Player does not exist!",
+                )
+
         except SQLAlchemyError as e:
             error = str(e.__dict__["orig"])
             logging.error(error)
@@ -39,15 +103,31 @@ def index():
         if playerID and playerID is not None:
             # If we have a playerid, search the pitchinganalytics table by the playerid
             try:
-                players = PitchingAnalytics.query.filter_by(playerID=playerID).all()
+                if not len(people) == 0:
+                    players = PitchingAnalytics.query.filter_by(playerID=playerID).all()
+                    playerBatting = BattingAnalytics.query.filter_by(
+                        playerID=playerID
+                    ).all()
             except SQLAlchemyError as e:
                 error = str(e.__dict__["orig"])
                 logging.error(error)
+
+            if players == []:
+                return render_template(
+                    "index.html",
+                    nameFirst=fName,
+                    nameLast=lName,
+                    form=form,
+                    players=players,
+                    player_batting=playerBatting,
+                    pID=playerID,
+                )
 
             # Return the page with the necessary data to display
             return render_template(
                 "index.html",
                 players=players,
+                player_batting=playerBatting,
                 nameFirst=fName,
                 nameLast=lName,
                 form=form,
@@ -79,6 +159,9 @@ def index():
             randomPitchingStats = PitchingAnalytics.query.filter_by(
                 playerID=randPlayerId
             ).all()
+            randBattingStats = BattingAnalytics.query.filter_by(
+                playerID=randPlayerId
+            ).all()
         except SQLAlchemyError as e:
             error = str(e.__dict__["orig"])
             logging.error(error)
@@ -88,6 +171,9 @@ def index():
             # Try to query for pitching stats, catch any errors
             try:
                 randomPitchingStats = PitchingAnalytics.query.filter_by(
+                    playerID="ryanno01"
+                ).all()
+                randBattingStats = BattingAnalytics.query.filter_by(
                     playerID="ryanno01"
                 ).all()
             except SQLAlchemyError as e:
@@ -103,6 +189,7 @@ def index():
             nameFirst=fName,
             nameLast=lName,
             players=randomPitchingStats,
+            player_batting=randBattingStats,
         )
 
     # Return a blank page with the search form
@@ -116,7 +203,6 @@ def index():
 # FAVORITES PAGE
 # **************
 @app.route("/favorites", methods=["GET", "POST"])
-@login_required
 def favorites():
     # Calculate POSTs first to eliminate unecessary data accesses
     if request.method == "POST":
@@ -159,12 +245,14 @@ def favorites():
         lName = request.args["lastName"]
         try:
             player = PitchingAnalytics.query.filter_by(playerID=playerid).all()
+            playerBatting = BattingAnalytics.query.filter_by(playerID=playerid).all()
         except SQLAlchemyError as e:
             error = str(e.__dict__["orig"])
             logging.error(error)
         return render_template(
             "favorites.html",
             player_data=player,
+            player_batting=playerBatting,
             firstName=fName,
             lastName=lName,
             favorites=fav_players,

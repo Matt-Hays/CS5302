@@ -7,7 +7,7 @@
 }
 
 a {
-  color: inherit;
+  /* color: inherit; */
   text-decoration: none;
 }
 
@@ -24,9 +24,14 @@ ul {
   padding: 0 2rem;
 }
 
+.top-nav a {
+  color: inherit;
+}
+
 .nav-logo {
   grid-area: logo;
   font-size: 1.2rem;
+  font-weight: bold;
 }
 
 .nav-links {
