@@ -32,6 +32,10 @@
 </form>
 {% endif %}
 
+{% if search_error_message %}
+<p style="color:red; text-align: center">{{ search_error_message }}</p>
+{% endif %}
+
 {% if people %}
 {% for person in people %}
 <a href="{{ url_for('index', playerid=person.playerID, firstName=nameFirst, lastName=nameLast) }}">{{ person.playerID }}</a>
@@ -43,11 +47,10 @@
 {% endif %}
 
 {% if players or player_batting %}
-{% if not current_user.is_anonymous %}
 <div class="player-name-and-btn">
     <h2 class="player-name">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
 
-    {% if not current_user.is_anonymous %}
+    {% if not current_user.is_anonymous and not pID %}
     <form action="{{ url_for('favorites') }}" method="POST" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -57,11 +60,19 @@
             {{ form.favorite_submit(class_="form-submit favorites-btn") }}
         </p>
     </form>
+    {% elif not current_user.is_anonymous %}
+    <form action="{{ url_for('favorites') }}" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            {{ form.player_id(value=pID, hidden=True) }}
+        </p>
+        <p>
+            {{ form.favorite_submit(class_="form-submit favorites-btn") }}
+        </p>
+    </form>
     {% endif %}
 </div>
-{% else %}
-<h2 class="player-name" style="margin-bottom: 2rem">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
-{% endif %}
+
 
 </div>
 
