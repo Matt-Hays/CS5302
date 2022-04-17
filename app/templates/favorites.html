@@ -71,7 +71,68 @@
     {% endif %}
 
     {% endfor %}
+<<<<<<< HEAD
 
+=======
+    <table class="player-table">
+        <tr class="player-table-name">
+            <td>Batting Statistics</td>
+        </tr>
+        <tr class="player-table-head">
+            <th>Year ID</th>
+            <th>Games</th>
+            <th>At Bats</th>
+            <th>Runs</th>
+            <th>Singles</th>
+            <th>Doubles</th>
+            <th>Triples</th>
+            <th>Home Runs</th>
+            <th>Runs Batted In</th>
+            <th>Stolen Bases</th>
+            <th>Caught Stealing</th>
+            <th>Walks</th>
+            <th>Strikeouts</th>
+            <th>Intentional Walks</th>
+            <th>Hit by Pitch</th>
+            <th>Sacrifice Hits</th>
+            <th>Sacrifice Flies</th>
+            <th>GIDP</th>
+            <th>OBP</th>
+            <th>RC</th>
+            <th>RC27</th>
+        </tr>
+
+        {% for player in player_batting %}
+        {# {% if player.RC is not none %} #}
+        <tr class="player-table-rows">
+            <td>{{ player.yearID }}</td>
+            <td>{{ player.G }}</td>
+            <td>{{ player.AB }}</td>
+            <td>{{ player.R }}</td>
+            <td>{{ player.H }}</td>
+            <td>{{ player.B2 }}</td>
+            <td>{{ player.B3 }}</td>
+            <td>{{ player.HR }}</td>
+            <td>{{ player.RBI }}</td>
+            <td>{{ player.SB }}</td>
+            <td>{{ player.CS }}</td>
+            <td>{{ player.BB }}</td>
+            <td>{{ player.SO }}</td>
+            <td>{{ player.IBB }}</td>
+            <td>{{ player.HBP }}</td>
+            <td>{{ player.SH }}</td>
+            <td>{{ player.SF }}</td>
+            <td>{{ player.GIDP }}</td>
+            <td>{{ player.OBP }}</td>
+            <td>{{ player.TB }}</td>
+            <td>{{ player.RC }}</td>
+            <td>{{ player.RC27 }}</td>
+        </tr>
+        {# {% endif %} #}
+        {% endfor %}
+
+    </table>
+>>>>>>> main
     {% endif %}
 
 {% endblock %}
