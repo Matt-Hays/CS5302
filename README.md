@@ -7,17 +7,17 @@ Original Retrosheets data can be found at: [retrosheets](https://retrosheet.org/
 > **NOTE:** When viewing the database through the web app, we are intentionally filtering out data prior to 1974, as the project requirements did not require Retrosheets data prior to 1974.**
 
 ## Recreate Database
-All of the Database SQL files are located in *Documentation/SQL/*. The database will be dumped to *00-dump.sql*. If this file exists, you can recreate the entire database with it. In the event that it does not exist, all of the following SQL scripts will be necessary to recreate the database for development and need to be run in the following order:
-1. 01-createDB.sql
-1. 02-createAuth.sql
-1. 03-lahman2019.sql
-1. 04-pitchingAgainst.sql
-1. 05-pitchingAnalytics.sql
-1. 06-pitchingAnalyticsTrigger.sql
-1. 07-pitchingAgainst_update.sql
+All of the Database SQL files are located in *Documentation/SQL/*. The database will be dumped to [00-dump.sql](./Documentation/SQL/00-dump.sql). If this file exists, you can recreate the entire database with it. In the event that it does not exist, all of the following SQL scripts will be necessary to recreate the database for development and need to be run in the following order:
+1. [01-createDB.sql](./Documentation/SQL/01-createDB.sql)
+1. [02-createAuth.sql](./Documentation/SQL/02-createAuth.sql)
+1. [03-lahman2019.sql](./Documentation/SQL/03-lahman2019.sql)
+1. [04-pitchingAgainst.sql](./Documentation/SQL/04-pitchingAgainst.sql)
+1. [05-pitchingAnalytics.sql](./Documentation/SQL/05-pitchingAnalytics.sql)
+1. [06-pitchingAnalyticsTrigger.sql](./Documentation/SQL/06-pitchingAnalyticsTrigger.sql)
+1. [07-pitchingAgainst_update.sql](./Documentation/SQL/07-pitchingAgainst_update.sql)
    * *NOTE: This script will take approximately 10 minutes to run.*
-1. 08-battingAnalytics.sql
-1. 09-favorites.sql
+1. [08-battingAnalytics.sql](./Documentation/SQL/08-battingAnalytics.sql)
+1. [09-favorites.sql](./Documentation/SQL/09-favorites.sql)
 
 > **Note:** For details on how data was imported from RetroSheets, see: [Documentation/Scripts/README.md](./Documentation/Scripts/README.md)
 
