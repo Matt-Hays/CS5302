@@ -1,6 +1,7 @@
 --
 -- Table structure for table `favorites`
 --
+
 CREATE
 OR REPLACE TABLE `favorites` (
     `userID` int(11) NOT NULL,
