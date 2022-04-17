@@ -19,7 +19,7 @@ All of the Database SQL files are located in *Documentation/SQL/*. The database 
 1. 08-battingAnalytics.sql
 1. 09-favorites.sql
 
-> **Note:** For details on how data was imported from RetroSheets, see: (Documentation/Scripts/README.md)[./Documentation/Scripts/README.md]
+> **Note:** For details on how data was imported from RetroSheets, see: [Documentation/Scripts/README.md](./Documentation/Scripts/README.md)
 
 ## Configuring the Virtual Environment
 A virtual environment will allow for the installation of the required packages (as specified in *requirements.txt*). There are a number of ways to do this. One of the easiest ways is to use the [venv](https://docs.python.org/3/library/venv.html) module. You may have to install this first (`pip install venv`). Once installed:
