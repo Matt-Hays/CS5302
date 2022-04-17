@@ -15,7 +15,7 @@ All SQL scripts necessary to recreate our augmented version of the Lahman databa
 5. pitchingAnalytics.sql
 6. pitchingAnalyticsTrigger.sql
 7. pitchingAgainst_update.sql 
-   * NOTE: This script will take approximately 10 minutes to run.*
+   * *NOTE: This script will take approximately 10 minutes to run.*
 8. battingAnalytics.sql
 9. favorites.sql
 
