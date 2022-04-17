@@ -30,9 +30,9 @@ A virtual environment will allow for the installation of the required packages (
 If you have to install new packages, make sure you have activated the virtual environment as described above.  Once activated, `pip install NEWPACKAGE`. Make sure you updated requirements.txt via `pip freeze > requirements.txt`.
 
 ## Launching the Web App with Flask
-In order to launch the web app, you will need to enter `flask run` from within the virtual environment. Flask will attempt to connect to the database using the following credentials: 
-* username: web
-* password: dbrules
+In order to launch the web app, you will need to enter `flask run` from within the virtual environment. Flask will attempt to connect to the database using the following credentials (via the included .env): 
+ * username: web
+ * password: dbrules
 Once Flask connects to the database, open a web browser and go to `localhost:5000`.
 
 ## Navigating the Web App
@@ -41,6 +41,9 @@ When the web application loads, perform the following actions:
    * You can register with any username and password you wish; it does not need to match that of your database login. 
 2. Once you are registered, navigate to the Login page and login to your account. 
 3. After creating an account, you can navigate to the Home page and search for a player to view their statistics
+   * A random player is presented on the Home page for viewing until you search for a player of your choice
+4. To add a (searched for or randomly generated) player to your Favorites, click the `Add to Favorites` button. 
+5. Navigate to the Favorites page in the upper right to view your favorite players and re-load their data.
 
 
 ## Project Creation Notes -- do not include this in project submission
