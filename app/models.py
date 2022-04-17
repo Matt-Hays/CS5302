@@ -59,7 +59,7 @@ class Pitching(db.Model):  # type: ignore #noqa
 
 
 class PitchingAnalytics(db.Model):  # type: ignore #noqa
-    __tablename__ = "pitchinganalytics"
+    __tablename__ = "PitchingAnalytics"
 
     analytics_ID = db.Column(db.Integer, primary_key=True)
     playerID = db.Column(db.String(255), unique=True)
