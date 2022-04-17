@@ -16,13 +16,8 @@
 
 <h1 class="page-header">Baseball Database</h1>
 
-<<<<<<< HEAD
-
-<form action="" method="POST" novalidate class="search-form">
-=======
 {% if not message %}
 <form action="" method="POST" novalidate class="login-form">
->>>>>>> main
     {{ form.hidden_tag() }}
     <p class="input-container">
         {{ form.player_search.label }}
@@ -47,12 +42,8 @@
 <p class="message">{{ message }}</p>
 {% endif %}
 
-<<<<<<< HEAD
-{% if players %}
-=======
 {% if players or player_batting %}
 {% if not current_user.is_anonymous %}
->>>>>>> main
 <div class="player-name-and-btn">
     <h2 class="player-name">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
 
@@ -66,15 +57,11 @@
             {{ form.favorite_submit(class_="form-submit favorites-btn") }}
         </p>
     </form>
-<<<<<<< HEAD
     {% endif %}
-=======
-
 </div>
 {% else %}
 <h2 class="player-name" style="margin-bottom: 2rem">Player: <span>{{ nameFirst.capitalize() }} {{ nameLast.capitalize() }}</span></h2>
 {% endif %}
->>>>>>> main
 
 </div>
 
@@ -100,10 +87,6 @@
     </tr>
 
     {% for player in players %}
-<<<<<<< HEAD
-
-=======
->>>>>>> main
     {% if player.PARCA is not none %}
     <tr class="player-table-rows">
         <td>{{ player.yearID }}</td>
@@ -122,8 +105,6 @@
         <td>{{ player.PARCA }}</td>
     </tr>
     {% endif %}
-<<<<<<< HEAD
-=======
     {% endfor %}
 
 </table>
@@ -155,10 +136,8 @@
         <th>RC</th>
         <th>RC27</th>
     </tr>
->>>>>>> main
 
     {% for player in player_batting %}
-    {# {% if player.RC is not none %} #}
     <tr class="player-table-rows">
         <td>{{ player.yearID }}</td>
         <td>{{ player.G }}</td>
@@ -183,7 +162,6 @@
         <td>{{ player.RC }}</td>
         <td>{{ player.RC27 }}</td>
     </tr>
-    {# {% endif %} #}
     {% endfor %}
 
 </table>
