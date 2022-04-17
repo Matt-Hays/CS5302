@@ -4,7 +4,7 @@ The following documentation describes how to (1) configure the version of the La
 Information regarding the original Lahman database can be found at: [lahman](https://www.seanlahman.com/files/database/readme2017.txt).
 Original Retrosheets data can be found at: [retrosheets](https://retrosheet.org/).
 
-> **NOTE:** When viewing the database through the web app, we are intentionally filtering out data prior to 1974, as this is as far back as we imported retrosheets data for.
+> **NOTE:** When viewing the database through the web app, we are intentionally filtering out data prior to 1974, as the project requirements did not require Retrosheets data prior to 1974.**
 
 ## Recreate Database
 All of the Database SQL files are located in *Documentation/SQL/*. The database will be dumped to *00-dump.sql*. If this file exists, you can recreate the entire database with it. In the event that it does not exist, all of the following SQL scripts will be necessary to recreate the database for development and need to be run in the following order:
@@ -61,7 +61,7 @@ FLASK_APP=main.py
 ```
 
 ## Launching the Web App with Flask
-In order to launch the web app, you will need to enter `flask run` from within the virtual environment. Flask will attempt to connect to the database using the following credentials:
+In order to launch the web app, you will need to enter `flask run` from within the virtual environment. Flask will attempt to connect to the database using the following credentials (via the included .env):
 * username: **web**
 * password: **dbrules**
 Once Flask connects to the database, open a web browser and go to `localhost:5000`.
@@ -70,17 +70,20 @@ Once Flask connects to the database, open a web browser and go to `localhost:500
 When the web application loads, perform the following actions:
 1. Navigate to the Register link in the upper right corner of the page and create an account.
    * You can register with any username and password you wish; it does not need to match that of your database login.
-1. Once you are registered, navigate to the Login page and login to your account.
-1. After creating an account, you can navigate to the Home page and search for a player to view their statistics
+2. Once you are registered, navigate to the Login page and login to your account.
+3. After creating an account, you can navigate to the Home page and search for a player to view their statistics
+   * A random player is presented on the Home page for viewing until you search for a player of your choice
+4. To add a (searched for or randomly generated) player to your Favorites, click the `Add to Favorites` button.
+5. Navigate to the Favorites page in the upper right to view your favorite players and re-load their data.
 
+## Project Contents
+* The ER Diagrams for this project are located in the Documentation folder.
 
 ## Project Creation Notes -- do not include this in project submission
 
 This repository is intended for us to work on the project together from a distance.
 
 If you have any questions or trouble pushing/pulling/forking the repo, please let someone know.
-
-
 
 ###### Please use and merge branches so that we're not overwriting each other's work - or doing the same thing twice.
 
