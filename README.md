@@ -1,5 +1,5 @@
 # CS5302 Database Project
-The following documentation describes how to (1) configure the version of the Lahman database that has been augmented using data provided by Retrosheets and (2) generate the web pages that were created for the CSI 5302 group project by the team consisting of Matthew Hayes, Sarah Smallwood, and Joshua Wellman.
+The following documentation describes how to (1) configure the version of the Lahman database that has been augmented using data provided by Retrosheets and (2) generate the web pages that were created for the CSI 5302 group project by the team consisting of Matthew Hays, Sarah Smallwood, and Joshua Wellman.
 
 Information regarding the original Lahman database can be found at: [lahman](https://www.seanlahman.com/files/database/readme2017.txt).
 Original Retrosheets data can be found at: [retrosheets](https://retrosheet.org/).
