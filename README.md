@@ -19,7 +19,7 @@ All SQL scripts necessary to recreate our augmented version of the Lahman databa
 8. battingAnalytics.sql
 9. favorites.sql
 
-## Virtual Environment
+## Configuring the Virtual Environment
 A virtual environment will allow for the installation of the required packages (as specified in *requirements.txt*). There are a number of ways to do this. One of the easiest ways is to use the [venv](https://docs.python.org/3/library/venv.html) module. You may have to install this first (`pip install venv`). Once installed:
 1. Create a new virtual environment: `python3 -m venv venv`
 2. Activate the new virtual environment on Linux: `source venv/bin/activate`
@@ -29,11 +29,18 @@ A virtual environment will allow for the installation of the required packages (
 ### Necessary Packages - See requirements.txt
 If you have to install new packages, make sure you have activated the virtual environment as described above.  Once activated, `pip install NEWPACKAGE`. Make sure you updated requirements.txt via `pip freeze > requirements.txt`.
 
-## Flask
+## Launching the Web App with Flask
 In order to launch the web app, you will need to enter `flask run` from within the virtual environment. Flask will attempt to connect to the database using the following credentials: 
 * username: web
 * password: dbrules
+Once Flask connects to the database, open a web browser and go to `localhost:5000`.
 
+## Navigating the Web App
+When the web application loads, perform the following actions: 
+1. Navigate to the Register link in the upper right corner of the page and create an account. 
+   * You can register with any username and password you wish; it does not need to match that of your database login. 
+2. Once you are registered, navigate to the Login page and login to your account. 
+3. After creating an account, you can navigate to the Home page and search for a player to view their statistics
 
 
 ## Project Creation Notes -- do not include this in project submission
