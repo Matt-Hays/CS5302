@@ -61,10 +61,10 @@ FLASK_APP=main.py
 ```
 
 ## Launching the Web App with Flask
-In order to launch the web app, you will need to enter `flask run` from within the virtual environment. Flask will attempt to connect to the database using the following credentials (via the included .env):
+In order to launch the web app, you will need to enter `flask run` from within the virtual environment. If using the provided .env file, Flask will attempt to connect to the database with the following credentials:
 * username: **web**
-* password: **dbrules**
-Once Flask connects to the database, open a web browser and go to `localhost:5000`.
+* password: **dbrules** <br/>
+If creating your own .env using the directions in the previous section, Flask will use your provided username and password to connect to the database. Once Flask connects to the database, open a web browser and go to `localhost:5000`.
 
 ## Navigating the Web App
 When the web application loads, perform the following actions:
