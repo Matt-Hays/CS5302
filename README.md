@@ -63,7 +63,8 @@ FLASK_APP=main.py
 ## Launching the Web App with Flask
 In order to launch the web app, you will need to enter `flask run` from within the virtual environment. If using the provided .env file, Flask will attempt to connect to the database with the following credentials:
 * username: **web**
-* password: **dbrules** <br/>
+* password: **dbrules**
+
 If creating your own .env using the directions in the previous section, Flask will use your provided username and password to connect to the database. Once Flask connects to the database, open a web browser and go to `localhost:5000`.
 
 ## Navigating the Web App
@@ -77,65 +78,4 @@ When the web application loads, perform the following actions:
 5. Navigate to the Favorites page in the upper right to view your favorite players and re-load their data.
 
 ## Project Contents
-* The ER Diagrams for this project are located in the Documentation folder.
-
-## Project Creation Notes -- do not include this in project submission
-
-This repository is intended for us to work on the project together from a distance.
-
-If you have any questions or trouble pushing/pulling/forking the repo, please let someone know.
-
-###### Please use and merge branches so that we're not overwriting each other's work - or doing the same thing twice.
-
-## Basic Git Usage
-
-- Install Git [git-scm Install Site](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-
-- Use `$ git --version` to check install and version number.
-
-- Use `$ git init` to start a local repository.
-
-- Use `$ git remote add origin git@github.com:<YOUR-USERNAME>/CS5302.git` to add the remote repo to git.
-
-- You can check the remotes you have saved by using `$ git remote show origin`
-
-- Use `$ git pull origin main` to make a local copy of the main repository.
-
-- Use `$ git checkout -b <branch-name>` to create a new local branch. The highlighted one is your current working branch.
-
-- Use `$ git branch -a` to show all branches.
-
-- Use `$ git push -u origin <YOUR-branch-name>` this will create a remote branch if none exists of the same name as your branch. We will review and merge code using the GitHub interface.
-
-- If you make an accidental commit *locally*, you can reset it by using `$ git reset HEAD`. This will reset **1** commit backwards.
-
-*Don't remove your branch until all merges on GitHub are complete*
-
-- To merge locally Use `$ git merge --no-ff <branch-name>` Make sure you're in the branch you want to merge **into**.
-
-- To remove a branch locally use `$ git branch -d <branch-name>`
-
-*You can't delete a branch that is currently in use. Use* `$ git branch checkout master` *to change to the master (or main) branch before deletion.*
-
-- You'll still have /remotes/origin/<branch-name> Remove with `$ git push origin --delete <brach-name>` **Warning this will delete the remote branch too!**
-
-### Pre-Commit Hooks
-A number of pre-commit hooks have been included to help keep our code neat and tidy. You must follow the guidance above to create a virtual environment and install the packages from *requirements.txt* to utilize pre-commit.
-
-1. Install pre-commit: `pre-commit install`
-1. Initially install hooks: `pre-commit run --all-files`
-
-The hooks will run whenever you attempt to commit new files. You will not be able to commit unless you fix the errors that are indicated. You can run the individual hooks via:
-
-* `black .`
-* `flake8 .`
-* `mypy .`
-
-There may be times when you don't agree with **flake8**.  In these cases, it may be necessary to put `  # noqa` at the end of a line to avoid all errors.  If there is a specific error you want to avoid, you can mark it with `  # noqa: E1234` assuming the error was E1234.
-
-#### Hooks
-1. *Black* - Code Formatting
-1. *Flake8* - Code Linting
-1. *Mypy* - Type Checking
-
-Additionally, there are a number of GitHub provided hooks that ensure trailing white-space is caught and configuration files (like *json* or *yaml*) are formatted correctly.
+The [ER Diagrams](./Documentation/ER_diagrams.pdf) for this project are located in the *Documentation* folder.
