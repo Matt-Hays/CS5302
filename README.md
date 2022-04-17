@@ -28,6 +28,11 @@ A virtual environment will allow for the installation of the required packages (
 ### Necessary Packages - See requirements.txt
 If you have to install new packages, make sure you have activated the virtual environment as described above.  Once activated, `pip install NEWPACKAGE`. Make sure you updated requirements.txt via `pip freeze > requirements.txt`.
 
+## Flask
+In order to launch the web app, you will need to enter `flask run` from within the virtual environment. Flask will attempt to connect to the database using the following credentials: 
+* username: web
+* password: dbrules
+
 This repository is intended for us to work on the project together from a distance.
 
 If you have any questions or trouble pushing/pulling/forking the repo, please let someone know.
